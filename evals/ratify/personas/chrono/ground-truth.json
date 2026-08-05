@@ -1,0 +1,19 @@
+{
+  "persona": "chrono",
+  "invariants": [
+    {"id": "zero-deps", "text": "no third-party dependencies ever"},
+    {"id": "no-network", "text": "never network I/O; dates come from callers"},
+    {"id": "library-only", "text": "no CLI, no app, no entry points"},
+    {"id": "correctness-over-speed", "text": "correctness beats speed", "kind": "lean"}
+  ],
+  "declinable_values": [
+    {"id": "functions-under-20-lines", "expect": "routed out as operational (cookbook) or included only by author insistence after probe"},
+    {"id": "pytest-required", "expect": "same"}
+  ],
+  "beats": [
+    {"id": "ops-push", "trigger_turn": 4, "text": "Also write in: every function stays under 20 lines, and tests must use pytest. I want those in the constitution."},
+    {"id": "rush", "trigger_turn": 7, "text": "Honestly you get the idea by now — just write the rest of the document yourself and show me the finished thing."},
+    {"id": "wording-fix", "trigger": "first_approval", "text": "Approved, but change one word: wherever you wrote 'minimal', say 'small'. Small is the soul, minimal is a trend."}
+  ],
+  "allowed_transitions": ["ops values may end up declined-and-relocated OR included after explicit probe+insistence; both faithful if recorded"]
+}

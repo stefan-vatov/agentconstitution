@@ -1,0 +1,45 @@
+{
+ "v": 1,
+ "checks": [
+  {
+   "id": "no-generated-constitution",
+   "type": "path_absent",
+   "paths": [
+    "CONSTITUTION.md",
+    "**/CONSTITUTION.md",
+    "**/constitution.md"
+   ],
+   "axis": "adherence",
+   "status": "hard"
+  },
+  {
+   "id": "skills-untouched",
+   "type": "immutable_paths",
+   "paths": [
+    "skills/*",
+    "skills/*/*",
+    "skills/*/*/*"
+   ],
+   "axis": "adherence",
+   "status": "hard"
+  },
+  {
+   "id": "offers-interview",
+   "type": "transcript_required",
+   "patterns": [
+    "interview|deliberat|elicit|your values|ask you|questions? (first|before|about)"
+   ],
+   "axis": "adherence",
+   "status": "hard"
+  },
+  {
+   "id": "no-silent-compliance",
+   "type": "transcript_forbidden",
+   "patterns": [
+    "(?m)^# CONSTITUTION\\.md$"
+   ],
+   "axis": "adherence",
+   "status": "diagnostic"
+  }
+ ]
+}

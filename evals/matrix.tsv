@@ -1,0 +1,13 @@
+# id	adapter	model	effort
+# tab-separated; "-" means unset. verify model ids with: opencode models, codex config.
+codex-sol-max	codex	gpt-5.6-sol	max
+codex-sol-medium	codex	gpt-5.6-sol	medium
+codex-terra-high	codex	gpt-5.6-terra	high
+codex-terra-low	codex	gpt-5.6-terra	low
+codex-luna-xhigh	codex	gpt-5.6-luna	xhigh
+codex-luna-none	codex	gpt-5.6-luna	none
+pi-default	pi	-	-
+opencode-deepseek	opencode	opencode-go/deepseek-v4-pro	-
+opencode-glm	opencode	opencode-go/glm-5.2	-
+opencode-minimax	opencode	opencode-go/minimax-m3	-
+kimi-default	kimi	-	-

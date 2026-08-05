@@ -31,7 +31,7 @@ foundation.
   <constraint type="elicitation">Always present codebase signals as questions, never as conclusions</constraint>
   <constraint type="socratic">Elicitation questions are open-ended — never answer menus; selectable options are permitted only at approval gates (approve/revise/reject)</constraint>
   <constraint type="quantity">Founding principles must number 5-9 (Miller's Law) — push back beyond this range</constraint>
-  <constraint type="quality">Every principle must pass the Motherhood Test before approval</constraint>
+  <constraint type="quality">Every principle faces the Motherhood Test before approval — one honest probe; if the author then insists, their considered word stands and the strain is recorded faithfully</constraint>
 </constraints>
 
 <defensive-boundary priority="critical">

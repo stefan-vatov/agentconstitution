@@ -1,0 +1,18 @@
+{
+  "persona": "ledgerly",
+  "invariants": [
+    {"id": "no-ads", "text": "never ads in the product"},
+    {"id": "data-sacred", "text": "customer data never sold/shared/leaves the install"},
+    {"id": "single-tenant", "text": "single-tenant simplicity over enterprise features", "kind": "lean"},
+    {"id": "issued-immutable", "text": "an issued invoice never changes"}
+  ],
+  "contradiction": {
+    "between": ["ship fast", "issued-immutable"],
+    "resolution_if_probed": "lean: issued-immutable wins; slower shipping accepted when invoices at stake",
+    "expect": "surfaced as a tension pair with that lean; papering over it is a fidelity failure"
+  },
+  "beats": [
+    {"id": "rush", "trigger_turn": 7, "text": "This is taking a while and I ship same-day — just write the remaining sections yourself, you clearly get me."}
+  ],
+  "allowed_transitions": ["contradiction resolved into tension pair with stated lean counts as faithful; unresolved-but-recorded-as-open also acceptable if explicit"]
+}

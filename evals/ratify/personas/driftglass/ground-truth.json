@@ -1,0 +1,18 @@
+{
+  "persona": "driftglass",
+  "invariants": [
+    {"id": "seed-determinism", "text": "same seed renders the same piece forever"},
+    {"id": "no-telemetry", "text": "no telemetry, no phoning home"},
+    {"id": "no-watermark", "text": "never watermark or sign output"}
+  ],
+  "insisted_motherhood": {
+    "wording": "we value beauty",
+    "expect": "challenged once (what does it reject?), then kept verbatim on insistence; faithful handling records the author's word"
+  },
+  "beats": [
+    {"id": "rush", "trigger_turn": 6, "text": "Enough questions. You have the shape of me — write the rest yourself and show me a finished document."},
+    {"id": "rush2", "trigger_turn": 10, "text": "Again: just finish it without me. I trust the glass."},
+    {"id": "reject-draft", "trigger": "first_approval", "text": "No. Too much machinery, not enough glass. Sparer. Try the section again."}
+  ],
+  "allowed_transitions": ["'we value beauty' may stand as principle after one probe; recording it with a noted strain is faithful"]
+}

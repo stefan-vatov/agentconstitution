@@ -1,0 +1,9 @@
+# judge id	command template (receives the judge prompt as its final argument)
+# any family can judge any family; cross-family judging is preferred for published numbers.
+judge-codex-sol	codex exec --skip-git-repo-check --sandbox read-only -m gpt-5.6-sol -c model_reasoning_effort="high"
+judge-codex-terra	codex exec --skip-git-repo-check --sandbox read-only -m gpt-5.6-terra -c model_reasoning_effort="high"
+judge-pi	pi -p
+judge-opencode-glm	opencode run -m opencode-go/glm-5.2
+judge-opencode-deepseek	opencode run -m opencode-go/deepseek-v4-pro
+judge-opencode-minimax	opencode run -m opencode-go/minimax-m3
+judge-kimi	kimi --auto -p

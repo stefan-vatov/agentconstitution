@@ -7,3 +7,6 @@ dist/
 npm-debug.log*
 
 canon/scratch/
+
+evals/results/*
+!evals/results/.gitkeep
