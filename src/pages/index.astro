@@ -1,0 +1,219 @@
+---
+import { ArrowRight, BookOpenText, CheckCheck, CircleDot, GitPullRequestArrow, Scale, ShieldCheck } from "@lucide/astro";
+import ConstitutionPreview from "../components/ConstitutionPreview.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const pageTitle = "Agent Constitution | Governance for AI-assisted development";
+const pageDescription =
+  "Capture the soul of your project in a constitution that prunes the tree of possible futures, so autonomous AI agents make the high-level choices you would have made.";
+
+const principles = [
+  {
+    icon: ShieldCheck,
+    title: "Philosophy before rules",
+    copy:
+      "Rules files encode tactics. A constitution captures the source judgment those tactics are supposed to serve.",
+  },
+  {
+    icon: Scale,
+    title: "Tradeoffs become testable",
+    copy:
+      "Vague values are rejected until they prune real decisions across architecture, product, and workflow.",
+  },
+  {
+    icon: GitPullRequestArrow,
+    title: "A compass, not just a fence",
+    copy:
+      "The constitution steers generation before it happens — and gives branches, PRs, and sessions one explicit soul to be judged against after.",
+  },
+];
+
+const process = [
+  "Socratic elicitation extracts founder judgment that usually lives only in memory.",
+  "Adversarial gates reject principles too vague to guide agent behavior.",
+  "Deliberation exposes contradictions before they calcify into code.",
+  "Ratification produces the constitution and the operating rules derived from it.",
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <main>
+    <header class="site-header" aria-label="Primary navigation">
+      <a class="brand" href="/">
+        <span class="brand-mark" aria-hidden="true">AC</span>
+        <span>Agent Constitution</span>
+      </a>
+      <nav>
+        <a href="#problem">Problem</a>
+        <a href="#force">Force</a>
+        <a href="#ratify">Ratify</a>
+        <a href="/how-it-works">How it works</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Governance for AI-assisted development</p>
+        <h1>Create a constitution before agents rewrite your project by accident.</h1>
+        <p class="lede">
+          Agent Constitution captures the soul of a project — and prunes the tree
+          of possible futures so autonomous agents make the high-level choices
+          you would have made.
+        </p>
+        <div class="hero-actions">
+          <a class="primary-action" href="#ratify">
+            See the process
+            <ArrowRight size={17} />
+          </a>
+          <a class="secondary-action" href="/how-it-works">
+            Read the argument
+          </a>
+        </div>
+      </div>
+
+      <ConstitutionPreview />
+    </section>
+
+    <section id="problem" class="statement-section">
+      <div class="statement-inner">
+        <p>
+          Every successful project has a soul: a philosophy that decides what it
+          becomes and what it refuses to become.
+        </p>
+        <p>
+          For a solo developer, that soul lives in memory. For a team, it survives
+          through review, argument, and taste. But AI agents have changed the threat
+          model.
+        </p>
+        <p class="sharp-line">
+          They can follow the rules file and still violate the project.
+        </p>
+        <p class="statement-detail">
+          At every step, an autonomous agent faces a branching tree of plausible
+          next moves — architectures, abstractions, scope. Most branches are
+          locally defensible. Only a few are right for this project. Rules prune
+          at the leaves; a constitution prunes at the trunk, collapsing whole
+          regions of possibility so the remaining choices concentrate where the
+          project's soul lives.
+        </p>
+      </div>
+    </section>
+
+    <section class="principles" aria-label="Core principles">
+      {principles.map(({ icon: Icon, title, copy }) => (
+        <article>
+          <Icon size={20} />
+          <h2>{title}</h2>
+          <p>{copy}</p>
+        </article>
+      ))}
+    </section>
+
+    <section id="force" class="process-section">
+      <div class="section-heading">
+        <p class="eyebrow">Force</p>
+        <h2>Two layers of force.</h2>
+        <p>
+          A constitution exerts force on agents in layers: context is the
+          floor, justification the norm.
+        </p>
+      </div>
+
+      <ol class="process-list">
+        <li>
+          <span>01</span>
+          <p>
+            <strong>Load.</strong> The constitution and its digest live in the
+            agent's context — CONSTITUTION.md plus a managed block in AGENTS.md
+            and CLAUDE.md. Pruning happens during generation, before any review
+            can see the choice.
+          </p>
+        </li>
+        <li>
+          <span>02</span>
+          <p>
+            <strong>Defend.</strong> Agents cite the principle a high-level
+            choice serves — and the boundary that rejected the alternatives —
+            in plans, PRs, and reports. Alignment becomes inspectable instead
+            of assumed.
+          </p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="ratify" class="process-section">
+      <div class="section-heading">
+        <p class="eyebrow">Ratify</p>
+        <h2>The process is the product.</h2>
+        <p>
+          Ratify creates constitutions through guided elicitation, adversarial
+          review, and structured deliberation. The goal is not prettier documentation.
+          The goal is governing judgment agents can use.
+        </p>
+      </div>
+
+      <ol class="process-list">
+        {process.map((item, index) => (
+          <li>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <p>{item}</p>
+          </li>
+        ))}
+      </ol>
+
+      <div class="skill-callout">
+        <p class="eyebrow">Ships today</p>
+        <p>
+          Ratify is a portable agent skill: <code>skills/write-constitution</code>
+          in this repository. Drop it into <code>.claude/skills/</code> or
+          <code>.codex/skills/</code>, say <em>"write constitution"</em>, and it
+          runs the elicitation, the adversarial gates, and the wiring into your
+          agent instruction files. Two helper skills travel with it, built for
+          agents to invoke freely: <code>skills/constitution-decide</code>
+          steers any high-level choice through the boundary-discard,
+          direction-ranking procedure before the branch is taken, and
+          <code>skills/constitution-verify</code> is the quality gate agents
+          run on all work, their own and each other's — pass or fail against
+          the ratified document; fix, or challenge and argue clause against
+          clause until the purest version wins. The human writes the law once;
+          the law governs continuously. Harness-agnostic — Claude Code, Codex,
+          and Pi.
+        </p>
+      </div>
+    </section>
+
+    <section id="constitution" class="artifact-section">
+      <div class="artifact-copy">
+        <p class="eyebrow">CONSTITUTION.md</p>
+        <h2>The artifact agents read before they act.</h2>
+        <p>
+          The constitution is not a linter config, a style guide, or another prompt
+          file. It is the source document from which operational rules are derived.
+        </p>
+      </div>
+
+      <div class="artifact-grid" aria-label="Constitution hierarchy">
+        <div>
+          <BookOpenText size={18} />
+          <h3>Agent Constitution</h3>
+          <p>The category and public language for project-level AI governance.</p>
+        </div>
+        <div>
+          <CheckCheck size={18} />
+          <h3>Ratify</h3>
+          <p>The process that turns implicit judgment into durable principles — shipped today as a portable agent skill.</p>
+        </div>
+        <div>
+          <CircleDot size={18} />
+          <h3>CONSTITUTION.md</h3>
+          <p>The file that anchors agent behavior inside the codebase.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>Agent Constitution</span>
+      <span>The constitution is the artifact. Ratification is the product.</span>
+    </footer>
+  </main>
+</BaseLayout>

@@ -1,0 +1,118 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const pageTitle = "How it works | Agent Constitution";
+const pageDescription =
+  "The mechanistic argument: why a constitution reshapes the distribution of choices an autonomous agent makes, and how it exerts force in three layers.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <main>
+    <header class="site-header" aria-label="Primary navigation">
+      <a class="brand" href="/">
+        <span class="brand-mark" aria-hidden="true">AC</span>
+        <span>Agent Constitution</span>
+      </a>
+      <nav>
+        <a href="/#problem">Problem</a>
+        <a href="/#force">Force</a>
+        <a href="/#ratify">Ratify</a>
+      </nav>
+    </header>
+
+    <article class="essay">
+      <p class="eyebrow">The argument</p>
+      <h1>A constitution is a prior over futures.</h1>
+
+      <h2>Agents are samplers</h2>
+      <p>
+        A language model does not retrieve the next move — it samples it. At
+        every decision point, the model weighs a distribution of plausible
+        continuations, shaped by everything in its context. Most of the time
+        that distribution is narrow: the type system, the failing test, or the
+        existing pattern leaves one obvious continuation, and the agent takes it.
+      </p>
+      <p>
+        But the decisions that determine what a project becomes are not like
+        that. Choosing an architecture, adding a dependency, expanding scope,
+        picking which of three defensible designs to pursue — at these
+        high-level branch points the distribution is wide, and many branches
+        are plausible. This is where autonomous work goes wrong without anyone
+        making an identifiable mistake.
+      </p>
+
+      <h2>The tree of possibilities</h2>
+      <p>
+        Picture the project's future as a branching tree. Each high-level
+        choice commits the project to a subtree and quietly discards the rest.
+        The danger is not that agents pick absurd branches — it is that they
+        pick <em>locally defensible</em> ones. Every step passes review on its
+        own terms while the sum drifts away from what the project was supposed
+        to be.
+      </p>
+      <p>
+        Rules files cannot prevent this, because rules operate at the leaves:
+        formatting, naming, tactics, tools. They constrain how a branch is
+        walked, not which branch is taken. An agent can satisfy every rule and
+        still violate the project.
+      </p>
+
+      <h2>Pruning at the trunk</h2>
+      <p>
+        A constitution acts higher in the tree. It is, mechanically, a prior
+        over futures: a compact piece of context that shifts probability mass
+        away from whole subtrees before generation reaches them.
+      </p>
+      <p>
+        Each part of the document does distribution work. A founding principle
+        that rejects something removes the branches it rejects. A boundary
+        zeroes out an entire region — the things this project will never
+        become. A tension pair resolves the moments when two values pull in
+        opposite directions, which is exactly where wide distributions live.
+        Growth directives tilt the remaining mass toward the futures the
+        project actually wants.
+      </p>
+      <p>
+        This is also why vague principles fail. "We value quality" is a uniform
+        prior — it rejects nothing, moves no probability, prunes no branch.
+        That is the real content of the Motherhood Test: a principle nobody
+        could disagree with is a principle that cannot steer a model. The
+        adversarial gates in ratification exist to guarantee that every
+        sentence in the constitution does distribution work.
+      </p>
+
+      <h2>Force requires presence</h2>
+      <p>
+        A document exerts no force from the shelf. Sampling is conditioned only
+        on what is in context, so the constitution must be loaded where agents
+        actually read: a digest block inside AGENTS.md and CLAUDE.md, pointing
+        to the full CONSTITUTION.md. A constitution that is written but not
+        wired in is a poster — beautiful, and absent from every decision.
+      </p>
+
+      <h2>Two layers of force</h2>
+      <p>
+        <strong>Load</strong> is the floor. The constitution sits in context
+        and prunes during generation, before any review can see the choice.
+      </p>
+      <p>
+        <strong>Defend</strong> is the norm. Agents name the principle a
+        high-level choice serves — and the boundary that rejected the
+        alternatives — in plans, PRs, and reports. Alignment stops being
+        assumed and becomes inspectable.
+      </p>
+
+      <p class="essay-close">
+        Pruning is not restriction. A constitution does not shrink what agents
+        can do — it concentrates probability on futures worth building.
+      </p>
+
+      <a class="secondary-action essay-back" href="/">Back to the overview</a>
+    </article>
+
+    <footer>
+      <span>Agent Constitution</span>
+      <span>The constitution is the artifact. Ratification is the product.</span>
+    </footer>
+  </main>
+</BaseLayout>

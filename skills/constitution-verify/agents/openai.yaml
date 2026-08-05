@@ -1,0 +1,4 @@
+interface:
+  display_name: "Constitution Verify"
+  short_description: "Verify a diff, branch, or project against CONSTITUTION.md — findings, never verdicts."
+  default_prompt: "Use $constitution-verify for this request: verify the current work against CONSTITUTION.md and produce the witness report."

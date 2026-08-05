@@ -1,0 +1,4 @@
+interface:
+  display_name: "Constitution Decide"
+  short_description: "Choose the best lawful option at a high-level decision using CONSTITUTION.md."
+  default_prompt: "Use $constitution-decide for this request: run the constitutional decision procedure and produce the decision record."
