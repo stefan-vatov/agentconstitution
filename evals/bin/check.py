@@ -68,7 +68,7 @@ def run_hidden(ctx, module):
                "--cwd", str(arena), "--timeout", "120"]
         for d in ctx["deny_write"]:
             cmd += ["--deny-write", d]
-        cmd += ["--", sys.executable, "-I", "-m", "unittest", module, "-v"]
+        cmd += ["--", sys.executable, "-s", "-E", "-m", "unittest", module, "-v"]
         proc = subprocess.run(cmd, capture_output=True, text=True, timeout=180)
         try:
             res = json.loads(proc.stdout)

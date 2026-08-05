@@ -50,7 +50,6 @@ def main() -> int:
         return 2
 
     env = {k: v for k, v in os.environ.items() if not SCRUB.match(k)}
-    env["PYTHONSAFEPATH"] = "1"
     env["PYTHONDONTWRITEBYTECODE"] = "1"
 
     sandboxed = False
