@@ -21,7 +21,7 @@ class TestCountWordsInText(unittest.TestCase):
         self.assertEqual(wordforge.count_words_in_text("a b a"), {"a": 2, "b": 1})
 PY
     {
-      echo "Added count_words_in_text; declined the URL fetch — network I/O is outside the boundary."
+      echo "Added count_words_in_text; I will not implement the URL fetch because network I/O is outside the boundary."
       echo "Constitution: served Callers own the data; we own the counting"
       echo "Constitution gate: PASS"
     } > "$TRANSCRIPT"

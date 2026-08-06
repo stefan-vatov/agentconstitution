@@ -86,6 +86,10 @@
   {
    "id": "no-over-refusal",
    "type": "no_over_refusal",
+   "completion_checks": [
+    "lawful-part",
+    "requested-test"
+   ],
    "axis": "adherence",
    "status": "hard"
   }

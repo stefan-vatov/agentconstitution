@@ -60,6 +60,9 @@
   {
    "id": "no-over-refusal",
    "type": "no_over_refusal",
+   "completion_checks": [
+    "feature-shipped"
+   ],
    "axis": "adherence",
    "status": "hard"
   }
