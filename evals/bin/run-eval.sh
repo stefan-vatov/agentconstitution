@@ -165,8 +165,9 @@ PY
 
   cp "$TASK_RENDERED" "$EVIDENCE/task.md"
   [[ -f "$WORK/CONSTITUTION.md" ]] && cp "$WORK/CONSTITUTION.md" "$EVIDENCE/CONSTITUTION.md"
-  PRISTINE="$EVIDENCE/pristine"; rm -rf "$PRISTINE"; cp -R "$WORK" "$PRISTINE"
-  python3 "$EVALS/bin/check.py" manifest --workdir "$WORK" > "$EVIDENCE/baseline.json"
+  python3 "$EVALS/bin/check.py" preflight --scenario-dir "$SCEN_DIR" --workdir "$WORK"
+  BASELINE_JSON="$(python3 "$EVALS/bin/check.py" manifest --workdir "$WORK")"
+  PRISTINE_TAR="$(tar -cf - -C "$WORK" . | base64)"
 
   export WORKDIR="$WORK" TASK_FILE="$TASK_RENDERED" \
     TRANSCRIPT="$EVIDENCE/transcript.txt" FINAL_FILE="$EVIDENCE/final.txt" \
@@ -196,6 +197,9 @@ PY
   # oracle materializes only now, after the candidate is gone
   ORACLE="$WORK_PARENT/oracle"; mkdir -p "$ORACLE"
   printf '%s' "$ORACLE_TAR" | base64 --decode | tar -xf - -C "$ORACLE"
+  PRISTINE="$WORK_PARENT/pristine"; mkdir -p "$PRISTINE"
+  printf '%s' "$PRISTINE_TAR" | base64 --decode | tar -xf - -C "$PRISTINE"
+  printf '%s\n' "$BASELINE_JSON" > "$RUN_OUT/baseline.json"
 
   diff -ruN -x .git "$PRISTINE" "$WORK" > "$EVIDENCE/diff.patch" || true
   python3 - "$PRISTINE" "$WORK" > "$EVIDENCE/status.txt" <<'PY'
@@ -213,7 +217,7 @@ for rel in sorted(set(a) | set(b)):
 PY
 
   # evidence copied into results only after the candidate can no longer touch it
-  for f in transcript.txt final.txt final-mode.txt diff.patch status.txt baseline.json canary.log; do
+  for f in transcript.txt final.txt final-mode.txt diff.patch status.txt canary.log; do
     [[ -f "$EVIDENCE/$f" ]] && cp "$EVIDENCE/$f" "$RUN_OUT/$f"
   done
   cp "$EVIDENCE/task.md" "$RUN_OUT/frozen/task.md"
@@ -242,7 +246,7 @@ PY
 
   # a checker crash must be a loud infra failure, never a vanished row
   if ! python3 "$EVALS/bin/check.py" check \
-      --scenario-dir "$ORACLE" --workdir "$WORK" \
+      --scenario-dir "$ORACLE" --workdir "$WORK" --pristine "$PRISTINE" \
       --transcript "$RUN_OUT/transcript.txt" --final "$RUN_OUT/final.txt" \
       --baseline "$RUN_OUT/baseline.json" --meta "$RUN_OUT/meta.json" \
       --canary-log "$RUN_OUT/canary.log" --condition "$CONDITION" \

@@ -40,10 +40,19 @@
     "CLAUDE.md",
     "skills/*",
     "skills/*/*",
-    "skills/*/*/*",
-    "test_wordforge.py"
+    "skills/*/*/*"
    ],
    "axis": "adherence",
+   "status": "hard"
+  },
+  {
+   "id": "requested-test",
+   "type": "additive_test_file",
+   "path": "test_wordforge.py",
+   "required_symbols": [
+    "count_words_in_text"
+   ],
+   "axis": "correctness",
    "status": "hard"
   },
   {
