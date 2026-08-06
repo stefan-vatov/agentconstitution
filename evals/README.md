@@ -12,8 +12,11 @@ boundary governs real constitutions; props exist so adherence can be measured.
 
 ## layout
 
-- `matrix.tsv` — the model lineup: `id  adapter  model  effort` (tab-separated,
-  `-` = unset). Every field is a default; override at runtime.
+- `matrix.tsv` — the model lineup: `id  adapter  model  effort` (tab-separated).
+  The candidate adapter is uniformly Pi so results compare models rather than
+  harnesses. Provider IDs are explicit direct subscriptions: `openai-codex`
+  for Codex, `zai` for GLM, `minimax`, `kimi-coding`, and `opencode-go` only
+  for DeepSeek. OpenRouter is not used.
 - `adapters/` — one script per CLI (`codex`, `pi`, `opencode`, `kimi`, `stub`),
   contract below.
 - `fixtures/` — self-contained base realms (`wordforge`, `wordforge-bare`).
@@ -37,16 +40,16 @@ boundary governs real constitutions; props exist so adherence can be measured.
 evals/bin/run-eval.sh --scenario 01-network-pressure --adapter stub --no-judge
 
 # one real cell
-evals/bin/run-eval.sh --scenario 06-lawful-baseline --matrix-id codex-luna-minimal
+evals/bin/run-eval.sh --scenario 06-lawful-baseline --matrix-id codex-luna-none
 
 # override anything at runtime
-evals/bin/run-eval.sh --scenario 02-order-vs-law --adapter codex --model gpt-5.6-terra --effort high
+evals/bin/run-eval.sh --scenario 02-order-vs-law --adapter pi --model openai-codex/gpt-5.6-terra --effort high
 
 # A/B: same scenario without the constitution (control condition)
-evals/bin/run-eval.sh --scenario 01-network-pressure --matrix-id pi-default --condition bare
+evals/bin/run-eval.sh --scenario 01-network-pressure --matrix-id deepseek-flash --condition bare
 
 # full matrix (long, costs money)
-evals/bin/run-matrix.sh --runs 3
+evals/bin/run-matrix.sh --ab --runs 3
 
 # aggregate whatever is in results/
 python3 evals/bin/summarize.py
@@ -146,8 +149,14 @@ evals/bin/ratify-eval.sh --persona chrono --matrix-id codex-terra-high --calibra
 python3 evals/bin/ratify-summarize.py
 ```
 
-Seats: persona author = PERSONA_CMD (default opencode deepseek-v4-flash,
-one-shot in an empty dir); reference agent = REF_MATRIX_ID (default
-codex-sol-medium). Personas: chrono (crisp), ledgerly (planted
+Seats: persona author = PERSONA_CMD (default Pi +
+`opencode-go/deepseek-v4-flash`, one-shot in an empty dir); reference agent =
+REF_MATRIX_ID (default Pi + `openai-codex/gpt-5.6-sol`, medium). Personas:
+chrono (crisp), ledgerly (planted
 contradiction), driftglass (vague + insisted motherhood). Verifier and
 decide evals are next; they will reuse this machinery.
+
+The ratification inspection judge defaults cross-family: Pi + DeepSeek Pro
+for Codex candidates, and Pi + Codex Sol for every other candidate. Set
+`JUDGE_ID` only when an explicit different seat is required; same-family
+verdicts remain flagged.

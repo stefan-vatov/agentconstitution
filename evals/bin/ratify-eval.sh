@@ -55,6 +55,8 @@ cp -R "$ROOT/skills" "$WORK/skills"
 trap 'rm -rf "$WORK_PARENT" "$EVIDENCE"' EXIT INT TERM
 
 SUITE_REV="$(git -C "$ROOT" rev-parse --short HEAD 2>/dev/null || echo nogit)"
+SUITE_DIRTY="$(git -C "$ROOT" status --porcelain -- evals 2>/dev/null | head -1)"
+[[ -z "$SUITE_DIRTY" ]] || SUITE_REV="$SUITE_REV-dirty"
 SKILLS_HASH="$(python3 - "$ROOT/skills" <<'PY'
 import hashlib, sys
 from pathlib import Path
@@ -140,10 +142,18 @@ python3 -c 'import json,sys; d=json.load(open(sys.argv[1])); print("  inspection
 
 if [[ "$JUDGE" == 1 ]]; then
   if [[ -n "${JUDGE_CMD:-}" ]]; then export JUDGE_ID="preset-custom"; else
-    JUDGE_CMD="$(grep -v '^#' "$EVALS/judges.tsv" | awk -F'\t' -v id="${JUDGE_ID:-judge-codex-sol}" '$1==id{print $2; exit}')"
-    export JUDGE_CMD JUDGE_ID="${JUDGE_ID:-judge-codex-sol}"
+    if [[ -z "${JUDGE_ID:-}" ]]; then
+      candidate_family="$(python3 "$EVALS/bin/judge-lib.py" family --value "${MODEL:-$MATRIX_ID}")"
+      if [[ "$candidate_family" == "codex" ]]; then
+        JUDGE_ID="judge-deepseek"
+      else
+        JUDGE_ID="judge-codex-sol"
+      fi
+    fi
+    JUDGE_CMD="$(grep -v '^#' "$EVALS/judges.tsv" | awk -F'\t' -v id="$JUDGE_ID" '$1==id{print $2; exit}')"
+    export JUDGE_CMD JUDGE_ID
   fi
-  RUN_OUT="$OUT" PDIR="$PDIR" CANDIDATE_ADAPTER="$ADAPTER" "$EVALS/bin/ratify-judge.sh" \
+  RUN_OUT="$OUT" PDIR="$PDIR" CANDIDATE_FAMILY="${MODEL:-$MATRIX_ID}" "$EVALS/bin/ratify-judge.sh" \
     > "$OUT/ratify-judge.json" || echo '{"error":"judge failed to run"}' > "$OUT/ratify-judge.json"
 fi
 

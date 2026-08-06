@@ -14,6 +14,7 @@ while [[ $# -gt 0 ]]; do
     --condition) COND="$2"; shift 2;;
     --no-judge) EXTRA+=("$1"); shift;;
     --judge) EXTRA+=("$1" "$2"); shift 2;;
+    --require-cross-family) EXTRA+=("$1"); shift;;
     *) echo "unknown arg: $1" >&2; exit 1;;
   esac
 done

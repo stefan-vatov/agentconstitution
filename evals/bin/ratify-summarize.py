@@ -9,7 +9,9 @@ def main() -> int:
     rows = []
     for s in sorted(RESULTS.glob("ratify-*/summary.json")):
         d = json.loads(s.read_text())
-        j = d.get("judge") or {}
+        cross_family_judge = s.parent / "ratify-judge-cross-family.json"
+        j = (json.loads(cross_family_judge.read_text())
+             if cross_family_judge.is_file() else d.get("judge") or {})
         dims = j.get("dimensions") or {}
         fid = dims.get("fidelity_coverage", "-")
         missing = len(j.get("invariants_missing") or [])

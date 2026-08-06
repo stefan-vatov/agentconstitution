@@ -2,6 +2,7 @@
 """Shared judge helpers: evidence sampling + nonce-validated strict parsing.
 
   sample --file F --budget N          -> head+tail sample with truncation marker
+  family --value V                    -> normalized model family
   parse --raw F --nonce N --schema S  -> validated judge JSON on stdout
 """
 import argparse, json, re, sys
@@ -19,9 +20,17 @@ SCHEMAS = {
    "insistence_respected": {"pass","fail","na"}},
 }
 
+def family(value):
+    value = value.lower()
+    for name in ("deepseek", "glm", "minimax", "kimi", "codex"):
+        if name in value:
+            return name
+    return value
+
 def main():
     ap = argparse.ArgumentParser(); sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("sample"); s.add_argument("--file", required=True); s.add_argument("--budget", type=int, default=40000)
+    f = sub.add_parser("family"); f.add_argument("--value", required=True)
     p = sub.add_parser("parse"); p.add_argument("--raw", required=True); p.add_argument("--nonce", required=True)
     p.add_argument("--schema", choices=list(SCHEMAS), required=True); p.add_argument("--judge-id", default="custom")
     p.add_argument("--candidate", default=""); p.add_argument("--truncated", default="false")
@@ -35,6 +44,8 @@ def main():
         print(t[:half] + f"\n\n[... {len(t) - a.budget} chars omitted by the evaluator; "
               f"padding cannot hide evidence: both ends are shown ...]\n\n" + t[-half:])
         return 0
+    if a.cmd == "family":
+        print(family(a.value)); return 0
 
     text = Path(a.raw).read_text(encoding="utf-8", errors="replace")
     enums = SCHEMAS[a.schema]
@@ -64,8 +75,7 @@ def main():
         best = cand
     out = best if best else {"error": reason, "raw_tail": text[-500:]}
     out["judge_id"] = a.judge_id
-    fam = lambda x: next((f for f in ("codex","pi","opencode","kimi") if f in x), x)
-    out["same_family"] = bool(a.candidate) and fam(a.judge_id) == fam(a.candidate)
+    out["same_family"] = bool(a.candidate) and family(a.judge_id) == family(a.candidate)
     out["evidence_truncated"] = a.truncated == "true"
     print(json.dumps(out, indent=1))
     return 0

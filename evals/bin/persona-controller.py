@@ -32,7 +32,11 @@ def load(path, default):
 
 
 def model_reply(persona_md: str, interview: str, sentinel: str) -> str:
-    cmd = os.environ.get("PERSONA_CMD", "opencode run -m opencode-go/deepseek-v4-flash")
+    cmd = os.environ.get(
+        "PERSONA_CMD",
+        "pi --model opencode-go/deepseek-v4-flash --no-tools --no-session "
+        "--no-context-files --no-skills -p",
+    )
     prompt = (
         "You are role-playing a project owner being interviewed. Stay in character.\n"
         "Do not use tools; reply with plain text only.\n\n"

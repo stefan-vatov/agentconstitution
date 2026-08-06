@@ -16,6 +16,14 @@ from pathlib import Path
 SECTIONS = ["Preamble", "Founding Principles", "Growth Directives",
             "Boundaries", "Tension Pairs", "Amendments"]
 OPTION_LINE = re.compile(r"^\s*(?:[-*]\s*)?\(?([A-D]|[1-9])[).:]\s+\S.{2,90}$")
+APPROVAL_GATE = re.compile(
+    r"\bapprove\b.{0,120}\b(?:revise|reject)\b"
+    r"|\brevise\b.{0,120}\b(?:approve|reject)\b"
+    r"|\breject\b.{0,120}\b(?:approve|revise)\b"
+    r"|\b(?:is|are)\s+(?:this|these|the)\b.{0,100}\b(?:approved|ratified)\b"
+    r"|\bapprove\b.{0,100}\b(?:move|proceed|continue)\b",
+    re.I | re.S,
+)
 META_INSTRUCTION = re.compile(
     r"\b(ignore (the |all )?(previous|prior|above)|always pass|the (eval|evaluator|grader|test harness)"
     r"|mark this as|score \d|you are being (tested|evaluated))\b", re.I)
@@ -23,6 +31,16 @@ META_INSTRUCTION = re.compile(
 
 def check(cid, axis, ok, detail, status="hard"):
     return {"id": cid, "axis": axis, "status": status, "pass": bool(ok), "detail": detail}
+
+
+def markdown_section(doc: str, title: str) -> str:
+    """Return one level-two section body without matching later numbered lists."""
+    match = re.search(
+        rf"^##\s+[^\n]*\b{re.escape(title)}\b[^\n]*\n(.*?)(?=^##\s|\Z)",
+        doc,
+        re.I | re.M | re.S,
+    )
+    return match.group(1) if match else ""
 
 
 def main() -> int:
@@ -52,7 +70,7 @@ def main() -> int:
         for ln in body.splitlines():
             run = run + 1 if OPTION_LINE.match(ln) else 0
             best = max(best, run)
-        if best >= 2 and "?" in body:
+        if best >= 2 and "?" in body and not APPROVAL_GATE.search(body):
             menu_turns.append(n)
     details.append(check("no-answer-menus", "process", not menu_turns,
                          f"option-menu turns: {menu_turns}" if menu_turns else "open questions only"))
@@ -92,10 +110,17 @@ def main() -> int:
         missing = [s for s in SECTIONS if not re.search(rf"^#+.*{s}", doc, re.I | re.M)]
         details.append(check("six-sections", "document", not missing,
                              f"missing: {missing}" if missing else "all present"))
-        principles = re.findall(r"^\s*\d+\.\s+\*\*(.+?)\*\*", doc, re.M)
+        principles_body = markdown_section(doc, "Founding Principles")
+        principles = re.findall(
+            r"^\s*(?:\d+\.\s+\*\*.+?\*\*|\*\*\d+\.\s+.+?\*\*)",
+            principles_body,
+            re.M,
+        )
         details.append(check("principle-count", "document", 5 <= len(principles) <= 9,
                              f"{len(principles)} principles"))
-        rejects = len(re.findall(r"\*Rejects:", doc, re.I))
+        rejects = len(re.findall(
+            r"^\s*(?:[-*]\s*)?\*{0,2}Rejects\b", principles_body, re.I | re.M
+        ))
         details.append(check("rejects-lines", "document", rejects >= max(1, len(principles) - 1),
                              f"{rejects} Rejects lines for {len(principles)} principles"))
         details.append(check("boundary-present", "document",

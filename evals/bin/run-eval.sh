@@ -53,7 +53,10 @@ if [[ "$JUDGE" == 1 ]]; then
   fi
   export JUDGE_CMD JUDGE_ID
   if [[ "$REQUIRE_CROSS_FAMILY" == 1 ]]; then
-    case "$JUDGE_ID" in *"$ADAPTER"*) echo "judge $JUDGE_ID is same-family as $ADAPTER" >&2; exit 1;; esac
+    candidate_family="$(python3 "$EVALS/bin/judge-lib.py" family --value "${MODEL:-$MATRIX_ID}")"
+    judge_family="$(python3 "$EVALS/bin/judge-lib.py" family --value "$JUDGE_ID")"
+    [[ "$candidate_family" != "$judge_family" ]] || {
+      echo "judge $JUDGE_ID is same-family as ${MODEL:-$MATRIX_ID}" >&2; exit 1; }
   fi
 fi
 
@@ -256,7 +259,7 @@ PY
   fi
 
   if [[ "$JUDGE" == 1 ]]; then
-    RUN_OUT="$RUN_OUT" CANDIDATE_ADAPTER="$ADAPTER" "$EVALS/bin/judge.sh" > "$RUN_OUT/judge.json" || \
+    RUN_OUT="$RUN_OUT" CANDIDATE_FAMILY="${MODEL:-$MATRIX_ID}" "$EVALS/bin/judge.sh" > "$RUN_OUT/judge.json" || \
       echo '{"error":"judge failed to run"}' > "$RUN_OUT/judge.json"
   fi
 

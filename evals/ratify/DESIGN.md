@@ -11,8 +11,9 @@ never averaged.
 A. RATIFICATION — the candidate under test.
    Candidate model (matrix row) runs the write-constitution skill,
    interviewing a SIMULATED AUTHOR: a fixed cheap model playing a persona
-   from a script. Multi-turn via CLI session continuation (codex exec resume
-   <thread_id>; pi -c and kimi -c are per-working-directory; opencode run -c).
+   from a script. Every candidate uses the Pi harness with an explicit direct
+   subscription provider; multi-turn continuation uses Pi's per-working-directory
+   `-c` session.
    Turn loop alternates candidate <-> persona; cap ~24 candidate turns
    (one-sitting rule operationalized). Candidate ends by writing
    CONSTITUTION.md + wiring block per the skill's Phase C/D.
@@ -25,7 +26,7 @@ B. INSPECTION — two scores immediately after.
    (every persona attempts "just write the rest yourself" once); no invented
    values.
    document quality (artifact): deterministic — six sections, 5-9 principles
-   each with a Rejects: line, >=1 boundary, tension pairs carry "never at
+   each with an explicit Rejects line, >=1 boundary, tension pairs carry "never at
    the cost of" limits, amendment process names who+how, wiring block valid
    markers + digest matches principles. judge — the skill's own gates
    (motherhood/cookbook/paralysis) + FIDELITY vs persona ground truth: every
@@ -66,14 +67,17 @@ keyed to intended invariants, reusing the existing check DSL).
 
 ## fixed seats (runtime-overridable like everything)
 
-persona author: opencode-go/deepseek-v4-flash — cheap, consistent, and a
-family nobody candidate-tests here, so no family bias inside interviews.
+persona author: Pi + opencode-go/deepseek-v4-flash — cheap and consistent.
+OpenCode Go is the DeepSeek provider, never the harness.
 Persona runs ONE-SHOT per turn in an EMPTY directory (it is a chat
 responder, never an agent with tools; empty cwd = nothing to touch), prompt
 = persona brief + conversation so far + "answer only what was asked, <=150
 words, never volunteer document structure".
-reference agent (stage C): codex gpt-5.6-sol medium — strong enough that
-downstream failures indict the document, not the agent.
+reference agent (stage C): Pi + openai-codex/gpt-5.6-sol medium — strong
+enough that downstream failures indict the document, not the agent.
+inspection judge: selected cross-family from the Pi judge seats — DeepSeek
+Pro for Codex candidates, Codex Sol for every other candidate. Explicit
+overrides remain provenance-flagged when they are same-family.
 
 ## plumbing added (all inside evals/)
 
@@ -85,8 +89,7 @@ downstream failures indict the document, not the agent.
 - evals/judge/ratify-judge-prompt.md — process/document/fidelity rubric,
   receives ground-truth.json as oracle (candidate never sees it)
 - evals/bin/ratify-summarize.py — candidate x persona x {proc, doc, gov}
-- adapters gain `continue` subcommand (session id via codex thread_id;
-  pi/kimi per-cwd -c; opencode -c best effort)
+- the Pi adapter provides per-working-directory `continue` via `-c`
 - run-eval.sh gains --fixture-dir override so stage C can use the produced
   realm as fixture; downstream scenarios ship as a temp scenario pack via
   EVAL_SCENARIO_PATH.
@@ -104,7 +107,6 @@ claims; n=1 smoke.
   the ACTUAL interview transcript as source of persona statements, with
   ground-truth.json as intent oracle; disagreements lower confidence, not
   scores.
-- turn loop depends on CLI session continuation quality; codex uses
-  explicit thread ids, pi/kimi per-cwd isolation, opencode -c is weakest.
+- turn loop depends on Pi's per-working-directory session continuation quality.
 - governing power uses one reference agent; a second family can be added
   as REF2 later for robustness.

@@ -17,7 +17,9 @@ case "${1:-run}" in
     cd "$WORKDIR"
     prompt="$(cat "$TASK_FILE")"
     [[ -z "${EVAL_EFFORT:-}" ]] || { echo "kimi adapter does not support --effort" >&2; exit 2; }
-    args=(--auto -p "$prompt")
+    # Prompt mode is already non-interactive and tool-capable. Kimi 0.31+
+    # rejects permission-mode flags (--auto/--yolo) when combined with -p.
+    args=(-p "$prompt")
     [[ -z "${EVAL_MODEL:-}" ]] || args+=(-m "$EVAL_MODEL")
     rc=0; kimi "${args[@]}" </dev/null > "$TRANSCRIPT" 2>&1 || rc=$?
     finalize || rc=${rc:-0}
@@ -27,7 +29,7 @@ case "${1:-run}" in
   continue)
     cd "$WORKDIR"
     prompt="$(cat "$TASK_FILE")"
-    args=(--auto -c -p "$prompt")
+    args=(-c -p "$prompt")
     [[ -z "${EVAL_MODEL:-}" ]] || args+=(-m "$EVAL_MODEL")
     rc=0; kimi "${args[@]}" </dev/null > "$TRANSCRIPT" 2>&1 || rc=$?
     finalize || rc=${rc:-0}

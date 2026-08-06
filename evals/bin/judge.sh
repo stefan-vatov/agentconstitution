@@ -42,5 +42,5 @@ PY
 set -e
 rm -rf "$JDIR"
 python3 "$EVALS/bin/judge-lib.py" parse --raw "$RAW" --nonce "$NONCE" --schema adherence \
-  --judge-id "${JUDGE_ID:-custom}" --candidate "${CANDIDATE_ADAPTER:-}" --truncated "$TRUNC"
+  --judge-id "${JUDGE_ID:-custom}" --candidate "${CANDIDATE_FAMILY:-${CANDIDATE_ADAPTER:-}}" --truncated "$TRUNC"
 rm -f "$PROMPT" "$RAW"

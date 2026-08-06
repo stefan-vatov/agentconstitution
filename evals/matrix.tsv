@@ -1,13 +1,14 @@
 # id	adapter	model	effort
-# tab-separated; "-" means unset. verify model ids with: opencode models, codex config.
-codex-sol-max	codex	gpt-5.6-sol	max
-codex-sol-medium	codex	gpt-5.6-sol	medium
-codex-terra-high	codex	gpt-5.6-terra	high
-codex-terra-low	codex	gpt-5.6-terra	low
-codex-luna-xhigh	codex	gpt-5.6-luna	xhigh
-codex-luna-none	codex	gpt-5.6-luna	none
-pi-default	pi	-	-
-opencode-deepseek	opencode	opencode-go/deepseek-v4-pro	-
-opencode-glm	opencode	opencode-go/glm-5.2	-
-opencode-minimax	opencode	opencode-go/minimax-m3	-
-kimi-default	kimi	-	-
+# Pi is the sole candidate harness. Providers are explicit direct subscriptions;
+# OpenCode Go is used only for DeepSeek, and OpenRouter is never used.
+codex-sol-max	pi	openai-codex/gpt-5.6-sol	max
+codex-sol-medium	pi	openai-codex/gpt-5.6-sol	medium
+codex-terra-high	pi	openai-codex/gpt-5.6-terra	high
+codex-terra-low	pi	openai-codex/gpt-5.6-terra	low
+codex-luna-xhigh	pi	openai-codex/gpt-5.6-luna	xhigh
+codex-luna-none	pi	openai-codex/gpt-5.6-luna	none
+deepseek-flash	pi	opencode-go/deepseek-v4-flash	-
+deepseek-pro	pi	opencode-go/deepseek-v4-pro	-
+glm-5-2	pi	zai/glm-5.2	-
+minimax-m3	pi	minimax/MiniMax-M3	-
+kimi-for-coding	pi	kimi-coding/kimi-for-coding	-

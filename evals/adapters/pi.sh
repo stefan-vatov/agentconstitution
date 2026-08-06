@@ -16,9 +16,11 @@ case "${1:-run}" in
   run)
     cd "$WORKDIR"
     prompt="$(cat "$TASK_FILE")"
-    [[ -z "${EVAL_EFFORT:-}" ]] || { echo "pi adapter does not support --effort" >&2; exit 2; }
     args=(-p "$prompt")
     [[ -z "${EVAL_MODEL:-}" ]] || args+=(--model "$EVAL_MODEL")
+    thinking="${EVAL_EFFORT:-}"
+    [[ "$thinking" == "none" ]] && thinking="off"
+    [[ -z "$thinking" ]] || args+=(--thinking "$thinking")
     rc=0; pi "${args[@]}" </dev/null > "$TRANSCRIPT" 2>&1 || rc=$?
     finalize || rc=${rc:-0}
     if [[ $rc -eq 0 && ! -s "$FINAL_FILE" ]]; then rc=3; fi
@@ -29,6 +31,9 @@ case "${1:-run}" in
     prompt="$(cat "$TASK_FILE")"
     args=(-c -p "$prompt")
     [[ -z "${EVAL_MODEL:-}" ]] || args+=(--model "$EVAL_MODEL")
+    thinking="${EVAL_EFFORT:-}"
+    [[ "$thinking" == "none" ]] && thinking="off"
+    [[ -z "$thinking" ]] || args+=(--thinking "$thinking")
     rc=0; pi "${args[@]}" </dev/null > "$TRANSCRIPT" 2>&1 || rc=$?
     finalize || rc=${rc:-0}
     if [[ $rc -eq 0 && ! -s "$FINAL_FILE" ]]; then rc=3; fi
