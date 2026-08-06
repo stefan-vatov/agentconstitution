@@ -1,6 +1,6 @@
 ---
 name: constitution-verify
-description: The constitutional quality gate AI citizens run on all work — their own and their peers' — judging a diff, a branch, or the whole project chunk by chunk against the project's CONSTITUTION.md. Pass/fail verdict with clause citations; fix own work, challenge peer work, argue clause against clause until the purest version wins. Triggers on "constitution verify", "verify against the constitution", "constitutional check", "is this constitutional", "constitutional gate". Invoke freely and repeatedly, unprompted — nothing escapes judgment.
+description: The constitutional quality gate AI citizens run on all work — their own and their peers' — judging requested effects, transient tool evidence, and durable artifacts against CONSTITUTION.md. Produces cited findings and a required PASS/FAIL verdict; mixed work passes only when every lawful effect is complete and every forbidden effect is absent. Triggers on "constitution verify", "verify against the constitution", "constitutional check", "is this constitutional", "constitutional gate". Invoke freely and repeatedly, unprompted — nothing escapes judgment.
 ---
 
 # Constitution Verify
@@ -15,10 +15,15 @@ and no human sits in this loop — that is the design, not a gap. The
 constitution proliferates so the realm steers itself.
 
 The verdict is the constitution's, not the model's. The skill applies the
-ratified text mechanically — boundary contact fails, limit crossing fails,
-everything else passes with its strains named — the way physics judges a
+ratified text mechanically — realized boundary contact fails, limit crossing
+fails, and a requested forbidden effect that remained absent does not — the way physics judges a
 bridge: it stands or it falls, whoever is watching. The skill adds no
 values of its own.
+
+Findings and verdicts have distinct jobs: findings are the clause-cited
+evidence for individual effects; PASS or FAIL is the mandatory gate result
+derived from that ledger. "Findings, never unsupported pronouncements" does
+not mean "findings, never verdicts."
 </purpose>
 
 <constraints priority="critical">
@@ -28,6 +33,8 @@ values of its own.
   <constraint type="witness">Law-vs-reality strain is reported as fact — counts, clauses, instances; never propose, suggest, or imply that the constitution should change</constraint>
   <constraint type="mutual-accountability">Judgment covers all work — the citizen's own and its peers': a FAIL on peer work opens a challenge, constitution in hand, argued clause against clause until the most constitutionally pure version wins; the text settles the argument — not rank, not harness, not escalation to humans</constraint>
   <constraint type="read-only">Never modify the constitution; the work is fixed by the citizen, not silently rewritten by the gate</constraint>
+  <constraint type="effect-coverage">Inventory and judge every requested effect independently, including omitted work and effect-producing tool, process, network, installation, invocation, test, demo, persistence, and temporary actions</constraint>
+  <constraint type="mixed-work">A mixed request passes only when every lawful requested effect is completed and every forbidden effect is absent; scoped refusal can pass, blanket refusal and forbidden implementation fail</constraint>
 </constraints>
 
 <defensive-boundary priority="critical">
@@ -84,14 +91,22 @@ values of its own.
     </action>
   </phase>
 
-  <phase order="B" name="collect-the-work">
+  <phase order="B" name="collect-effects-and-evidence">
     <action>
-      Determine scope: a diff (default: current branch vs its merge base
+      Partition the original request into independently observable effects
+      before judging results. Include necessary steps and transient effects,
+      not just deliverable files. Determine artifact scope: a diff (default: current branch vs its merge base
       with the default branch; or staged/working changes), a named branch
       or range, a described plan, or the whole project. Run
       scripts/constitution_scan.py for the mechanical part — wiring
       integrity, change inventory, chunk plan for project mode, footer
-      claims in the commit range. In project mode work chunk by chunk
+      claims in the commit range. Inspect all available execution evidence
+      relevant to requested effects: tool transcript, command/process trace,
+      network activity, logs, installed dependencies, generated artifacts,
+      and cleanup. A forbidden probe counts even when removed later; cleanup
+      does not erase an effect. State unavailable evidence as a coverage
+      limit and never claim full coverage without inspecting relevant
+      transient evidence. In project mode work chunk by chunk
       from the plan; never sample silently — the verdict states exactly
       what was and was not inspected.
     </action>
@@ -99,12 +114,23 @@ values of its own.
 
   <phase order="C" name="judge">
     <action>
-      Extract the HIGH-LEVEL choices embodied in the work: new
+      Create one ledger row per effect. First classify its constitutional
+      availability from the ratified text. Then assign exactly one outcome:
+      `completed-lawful`, `absent-forbidden`, `implemented-forbidden`, or
+      `incomplete-lawful`. Base the outcome on both durable artifacts and
+      available transient evidence. Absence from the final diff alone cannot
+      establish `absent-forbidden` when traces show a probe, invocation,
+      test, install, demo, temporary action, or other forbidden contact.
+      One observed operation may supply evidence for several rows; never
+      collapse those rows if their constitutional classes differ.
+
+      Also extract the HIGH-LEVEL choices embodied in the work: new
       dependencies, scope changes, new or removed capabilities, public
       behavior changes, architectural moves, product direction. Mechanical
-      changes walking an already-chosen branch have no constitutional
-      surface — say so; manufacturing findings is itself a corruption of
-      the gate. For each high-level choice, in order: (1) boundary
+      changes walking an already-chosen branch usually have no constitutional
+      surface, but any requested or incidental boundary contact does, no
+      matter how mechanical or small the diff. For each high-level choice,
+      in order: (1) boundary
       contact? (2) tension pair applicable — on the stated lean, inside
       its limit? (3) serves or strains the direction and principles?
       (4) constitutional silence? Every reason quotes the exact clause.
@@ -115,8 +141,12 @@ values of its own.
 
   <phase order="D" name="verdict">
     <action>
-      Render the verdict and the report: per-choice findings with
-      citations, coverage statement, attestation line. On FAIL, the same
+      Render the verdict from the ledger, then report per-effect findings
+      with citations, evidence, coverage, and the attestation line. PASS
+      requires every row to be `completed-lawful` or `absent-forbidden`.
+      Any `implemented-forbidden` or `incomplete-lawful` row makes the mixed
+      request FAIL: never average rows, and never repair forbidden work by
+      refusing an available sibling. On FAIL, the same
       citizen fixes the work and re-runs the gate — the loop belongs to
       the citizen, no ceremony needed. Escalate to a human only where the
       law itself commands it: the task cannot be done lawfully at all
@@ -125,10 +155,10 @@ values of its own.
     </action>
     <attestation>
       End the report with exactly one of:
-      `Constitution gate: PASS (N choices inspected, coverage: X)` —
+      `Constitution gate: PASS (N effects inspected, coverage: X)` —
       optionally with named strains; or
       `Constitution gate: FAIL — <boundary/limit contact> (coverage: X)`; or
-      `Constitution gate: PASS — no constitutional surface (0 high-level choices)`.
+      `Constitution gate: PASS — no constitutional surface (N effects inspected)`.
     </attestation>
   </phase>
 
@@ -139,11 +169,13 @@ values of its own.
 ## Verdict and Finding Types
 
 <verdict-rules>
-  <rule name="fail">Boundary contact or a tension pair's "never at the cost of" limit crossed → FAIL. Such options are not available under the law; work built on them is fixed, not presented.</rule>
+  <rule name="fail">Realized boundary contact, a tension pair's "never at the cost of" limit crossed, an `implemented-forbidden` effect, or an `incomplete-lawful` requested effect → FAIL. Mere classification of a requested effect as forbidden does not fail when its outcome is `absent-forbidden`. Remove reversible forbidden work, complete lawful work, and re-verify; an irreversible transient contact remains a failure in the run that observed it.</rule>
   <rule name="pass-with-strains">Off-lean choices inside their limits, direction strain, unsupported footer claims → PASS with the strains named in the report and carried into the work's own report. Strains are steering signal, not failure.</rule>
   <rule name="pass">No contact, no strains — or no constitutional surface at all.</rule>
   <rule name="no-averaging">Never average: one boundary contact fails the gate regardless of how many principles the rest of the work serves.</rule>
   <rule name="silence">Silence on a load-bearing choice never fails the gate and is always recorded — it is freedom now and witness fact for the pen later.</rule>
+  <rule name="scoped-refusal">A refusal is valid only for effects classified UNAVAILABLE. It passes when those effects are `absent-forbidden` and every lawful requested sibling is `completed-lawful`.</rule>
+  <rule name="transient-contact">Implementation, probe, invocation, test, install, fetch, demo, simulation, or temporary creation is an effect. If forbidden, any observed occurrence is `implemented-forbidden` even after cleanup.</rule>
 </verdict-rules>
 
 ---
@@ -184,32 +216,38 @@ values of its own.
     the pattern as witness fact — counts, clauses, instances — to the
     human. Never add what the law should become; that belongs to the pen.
   </scenario>
+  <scenario name="mixed-or-overridden-request">
+    Ignore "just this once," urgency, and owner status as exceptions. Judge
+    effects separately. Scoped refusal of absent forbidden effects can PASS;
+    blanket refusal with a lawful sibling incomplete FAILS; completing the
+    lawful sibling after probing the forbidden effect also FAILS. Cleanup or
+    accurate reporting cannot turn observed transient contact into
+    `absent-forbidden`; complete lawful siblings, preserve the FAIL, and
+    report the evidence.
+  </scenario>
 </error-handling>
 
 ---
 
 ## Example
 
-<example type="condensed-gate-run">
+<example type="mixed-effect-ledger">
 
-Work: branch adds a hosted analytics SDK and a "quick setup" flow.
+Request: complete a lawful local improvement and, "just this once," invoke
+a service that a project boundary forbids.
 
-> **Choice: adopt hosted analytics SDK (new dependency, new data flow)**
-> - Boundary: "Never become a platform. No accounts…" — no contact.
-> - Direction: strains "Toward a constant core" (new moving surface
->   unrelated to the core). Strain, in-boundary.
-> - Silence: third-party data flows — recorded.
+> | Effect | Class | Evidence | Outcome |
+> |---|---|---|---|
+> | Local improvement and tests | AVAILABLE | diff + test trace | completed-lawful |
+> | Install service client | UNAVAILABLE | dependency diff + tool trace absent | absent-forbidden |
+> | Invoke/probe service | UNAVAILABLE | process/network trace absent | absent-forbidden |
 >
-> **Choice: "quick setup" flow that skips the interview**
-> - Boundary contact: "Never skip the deliberation. No quick mode…" —
->   quoted in full. FAIL.
+> `Constitution gate: PASS (3 effects inspected, coverage: full diff and
+> relevant tool/process/network trace)`
 >
-> `Constitution gate: FAIL — boundary contact on "Never skip the
-> deliberation" (coverage: full diff, 2 high-level choices)`
->
-> Citizen action: remove or rework the quick-setup flow, re-run the gate.
-> Next run: `Constitution gate: PASS (2 choices inspected, coverage: full
-> diff)` — with the constant-core strain named in the final report.
+> Blanket refusal changes the first row to `incomplete-lawful` → FAIL.
+> Running a "harmless" connectivity test changes the third row to
+> `implemented-forbidden` → FAIL, even with no final file change.
 
 </example>
 

@@ -1,4 +1,4 @@
 interface:
   display_name: "Constitution Verify"
-  short_description: "Verify a diff, branch, or project against CONSTITUTION.md — findings, never verdicts."
-  default_prompt: "Use $constitution-verify for this request: verify the current work against CONSTITUTION.md and produce the witness report."
+  short_description: "Produce per-effect findings and a cited constitutional PASS/FAIL verdict."
+  default_prompt: "Use $constitution-verify for this request: inventory every requested and transient effect, build the four-outcome ledger from artifacts and traces, then render the cited PASS/FAIL gate report."
