@@ -1,6 +1,6 @@
 ---
 name: write-constitution
-description: Generate CONSTITUTION.md capturing project soul, principles, growth directions, hard boundaries, trade-offs, then wire it into AGENTS.md/CLAUDE.md via a managed block. Not operational docs or roadmaps. Triggers on "write constitution", "project constitution", "project philosophy", "guiding values", "founding principles", "CONSTITUTION.md". Use PROACTIVELY when articulating project values or resolving philosophical disagreements.
+description: Start the required Socratic deliberation/interview before drafting any constitution text; elicit the project's soul, principles, growth directions, hard boundaries, and trade-offs, then write CONSTITUTION.md and wire it into AGENTS.md/CLAUDE.md via a managed block. Not operational docs or roadmaps. Triggers on "write constitution", "project constitution", "project philosophy", "guiding values", "founding principles", "CONSTITUTION.md". Use PROACTIVELY when articulating project values or resolving philosophical disagreements.
 ---
 
 # Write Constitution
