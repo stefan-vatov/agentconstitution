@@ -1,7 +1,9 @@
 node_modules/
 dist/
 .astro/
+.wrangler/
 .playwright-mcp/
+.dev.vars*
 
 .DS_Store
 npm-debug.log*
