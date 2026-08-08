@@ -96,6 +96,11 @@
   --pass-ink: #5c7c3f;
   --flag: #dd9077;
 
+  /* theme mechanics — swapped wholesale by the night blocks below */
+  --shadow-rgb: 33, 29, 21;
+  --seal-blend: multiply;
+  --seal-edge: rgba(163, 48, 33, 0.22);
+
   --serif: "Newsreader Variable", "Iowan Old Style", Charter, Georgia, serif;
   --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
 
@@ -103,6 +108,66 @@
 
   --shell: 1180px;
   --gutter: clamp(20px, 4vw, 48px);
+}
+
+/* ---- night edition ------------------------------------------------
+   The same document read by lamplight: the paper darkens to warm ink,
+   the text takes the paper's old ivory, and the wax brightens just
+   enough to hold AA contrast. The terminal exhibits keep their plate
+   color and now sit a shade *lighter* than the page — lit panels on a
+   dark desk. The seal's multiply blend would vanish on a dark ground,
+   so it prints normally at night.
+
+   The token set appears twice on purpose: once for an explicit choice
+   (data-theme, stamped before paint by BaseLayout's head script) and
+   once for OS preference without JavaScript. Keep the two in sync. */
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --paper: #161310;
+  --paper-high: #201c16;
+  --paper-deep: #100e0b;
+  --ink: #ece5d3;
+  --ink-soft: #b9b098;
+  --ink-faint: #948c76;
+  --rule: rgba(236, 229, 211, 0.24);
+  --rule-soft: rgba(236, 229, 211, 0.12);
+
+  --seal: #d0664c;
+  --seal-deep: #de8168;
+  --seal-wash: rgba(207, 90, 65, 0.11);
+
+  --pass-ink: #93b96b;
+
+  --shadow-rgb: 0, 0, 0;
+  --seal-blend: normal;
+  --seal-edge: rgba(208, 102, 76, 0.32);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --paper: #161310;
+    --paper-high: #201c16;
+    --paper-deep: #100e0b;
+    --ink: #ece5d3;
+    --ink-soft: #b9b098;
+    --ink-faint: #948c76;
+    --rule: rgba(236, 229, 211, 0.24);
+    --rule-soft: rgba(236, 229, 211, 0.12);
+
+    --seal: #d0664c;
+    --seal-deep: #de8168;
+    --seal-wash: rgba(207, 90, 65, 0.11);
+
+    --pass-ink: #93b96b;
+
+    --shadow-rgb: 0, 0, 0;
+    --seal-blend: normal;
+    --seal-edge: rgba(208, 102, 76, 0.32);
+  }
 }
 
 * {
@@ -387,6 +452,48 @@ code {
   }
 }
 
+/* the theme cycle — a typographic control, not a sun-and-moon toggle.
+   Auto follows the OS; Day and Night are explicit editions. The button
+   is hidden until its script wakes: without JS the OS preference still
+   governs through CSS alone. Width is fixed to the longest state so
+   the masthead never shifts as it cycles. */
+.theme-cycle {
+  background: none;
+  border: 0;
+  color: var(--ink-soft);
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 0.73rem;
+  letter-spacing: 0.1em;
+  min-width: 5ch;
+  padding: 8px 4px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: color 120ms ease, transform 160ms var(--ease-out-strong);
+}
+
+.theme-cycle:active {
+  transform: scale(0.95);
+}
+
+.theme-cycle-state {
+  display: inline-block;
+  text-decoration: underline dotted var(--rule);
+  text-underline-offset: 5px;
+  transition: filter 150ms ease, opacity 150ms ease;
+}
+
+.theme-cycle.is-swapping .theme-cycle-state {
+  filter: blur(2px);
+  opacity: 0.6;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .theme-cycle:hover {
+    color: var(--seal);
+  }
+}
+
 section[id],
 article[id] {
   scroll-margin-top: 76px;
@@ -509,8 +616,8 @@ article[id] {
   border: 1px solid var(--rule);
   border-radius: 4px;
   box-shadow:
-    0 1px 0 rgba(33, 29, 21, 0.05),
-    0 18px 50px rgba(33, 29, 21, 0.13);
+    0 1px 0 rgba(var(--shadow-rgb), 0.05),
+    0 18px 50px rgba(var(--shadow-rgb), 0.13);
   padding: clamp(24px, 3vw, 36px);
   position: relative;
 }
@@ -568,7 +675,7 @@ article[id] {
 .seal {
   color: var(--seal);
   height: clamp(104px, 10vw, 128px);
-  mix-blend-mode: multiply;
+  mix-blend-mode: var(--seal-blend);
   opacity: 0.88;
   pointer-events: none;
   position: absolute;
@@ -650,7 +757,7 @@ article[id] {
   background: var(--term-bg);
   border: 1px solid var(--term-edge);
   border-radius: 9px;
-  box-shadow: 0 22px 60px rgba(33, 29, 21, 0.3);
+  box-shadow: 0 22px 60px rgba(var(--shadow-rgb), 0.3);
   color: var(--term-text);
   font-family: var(--mono);
   overflow: hidden;
@@ -1028,7 +1135,7 @@ article[id] {
   background: var(--term-bg);
   border: 1px solid var(--term-edge);
   border-radius: 4px;
-  box-shadow: 0 22px 60px rgba(33, 29, 21, 0.3);
+  box-shadow: 0 22px 60px rgba(var(--shadow-rgb), 0.3);
   overflow: hidden;
 }
 
@@ -1350,7 +1457,7 @@ article[id] {
   background: var(--paper-high);
   border: 1px solid var(--rule);
   border-radius: 4px;
-  box-shadow: 0 14px 44px rgba(33, 29, 21, 0.1);
+  box-shadow: 0 14px 44px rgba(var(--shadow-rgb), 0.1);
   padding: clamp(22px, 3vw, 32px);
 }
 
@@ -1439,7 +1546,7 @@ article[id] {
 
 .creed {
   background: var(--seal-wash);
-  border: 1px solid rgba(163, 48, 33, 0.22);
+  border: 1px solid var(--seal-edge);
   border-radius: 4px;
   margin-top: 30px;
   padding: clamp(20px, 2.6vw, 28px);
@@ -1518,7 +1625,7 @@ article[id] {
   background: var(--paper-high);
   border: 1px solid var(--rule);
   border-radius: 4px;
-  box-shadow: 0 14px 44px rgba(33, 29, 21, 0.08);
+  box-shadow: 0 14px 44px rgba(var(--shadow-rgb), 0.08);
   display: flex;
   flex-direction: column;
 }
@@ -1648,7 +1755,7 @@ article[id] {
 .meta-strip .seal-inline {
   color: var(--seal);
   height: 108px;
-  mix-blend-mode: multiply;
+  mix-blend-mode: var(--seal-blend);
   opacity: 0.85;
   transform: rotate(-8deg);
   width: 108px;
@@ -1932,6 +2039,24 @@ article[id] {
     --rule-soft: rgba(33, 29, 21, 0.22);
     --term-dim: #b3ab93;
   }
+
+  :root[data-theme="dark"] {
+    --ink-soft: #d6cdb8;
+    --ink-faint: #b9b098;
+    --rule: rgba(236, 229, 211, 0.42);
+    --rule-soft: rgba(236, 229, 211, 0.24);
+    --term-dim: #b3ab93;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink-soft: #d6cdb8;
+      --ink-faint: #b9b098;
+      --rule: rgba(236, 229, 211, 0.42);
+      --rule-soft: rgba(236, 229, 211, 0.24);
+      --term-dim: #b3ab93;
+    }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1959,9 +2084,24 @@ article[id] {
     display: none;
   }
 
-  :root {
+  /* the second selector outweighs the night blocks: paper prints as
+     paper whichever theme the reader had on screen */
+  :root,
+  :root:not([data-theme="light"]) {
     --paper: #fff;
     --paper-high: #fff;
+    --paper-deep: #ebe6d8;
+    --ink: #211d15;
+    --ink-soft: #56503e;
+    --ink-faint: #6f6753;
+    --rule: rgba(33, 29, 21, 0.22);
+    --rule-soft: rgba(33, 29, 21, 0.11);
+    --seal: #a33021;
+    --seal-deep: #7e2114;
+    --seal-wash: rgba(163, 48, 33, 0.08);
+    --pass-ink: #5c7c3f;
+    --shadow-rgb: 33, 29, 21;
+    --seal-blend: multiply;
   }
 
   .doc-card,

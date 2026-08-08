@@ -13,8 +13,9 @@ const onMechanism = Astro.url.pathname.replace(/\/$/, "") === "/how-it-works";
   <div class="shell">
     <a class="brand" href="/">
       <span class="brand-mark" aria-hidden="true">
+        {/* the nib stays ivory in both editions — the chip is wax-red either way */}
         <svg viewBox="22 12 56 98" width="11" height="19">
-          <path fill="var(--paper-high)" d="M 22 21 Q 50 12 78 21 L 78 34 C 78 44 76 50 74 56 C 66 74 55 90 50 110 C 45 90 34 74 26 56 C 24 50 22 44 22 34 Z"/>
+          <path fill="#fbf9f3" d="M 22 21 Q 50 12 78 21 L 78 34 C 78 44 76 50 74 56 C 66 74 55 90 50 110 C 45 90 34 74 26 56 C 24 50 22 44 22 34 Z"/>
           <circle cx="50" cy="50" r="8.4" fill="var(--seal)"/>
           <rect x="48.2" y="50" width="3.6" height="68" fill="var(--seal)"/>
         </svg>
@@ -37,7 +38,72 @@ const onMechanism = Astro.url.pathname.replace(/\/$/, "") === "/how-it-works";
       >
         GitHub <span aria-hidden="true">↗</span>
       </a>
+      <button class="theme-cycle" type="button" data-theme-cycle hidden>
+        <span class="theme-cycle-state">Auto</span>
+      </button>
       <a class="nav-cta" href={`${root}#adopt`}>Install</a>
     </nav>
   </div>
 </header>
+
+<script is:inline>
+  // The theme cycle: Auto (OS preference) -> Day -> Night. The stored
+  // choice is read again here so the label matches whatever the head
+  // script stamped before paint. The label swaps with the same blur the
+  // copy button uses; the page itself turns instantly, like a page.
+  (() => {
+    const btn = document.querySelector("[data-theme-cycle]");
+    if (!btn) return;
+    const state = btn.querySelector(".theme-cycle-state");
+    const order = ["auto", "light", "dark"];
+    const names = { auto: "Auto", light: "Day", dark: "Night" };
+    const osDark = matchMedia("(prefers-color-scheme: dark)");
+
+    const read = () => {
+      try {
+        const t = localStorage.getItem("theme");
+        if (t === "light" || t === "dark") return t;
+      } catch {}
+      return "auto";
+    };
+
+    const apply = (mode) => {
+      const root = document.documentElement;
+      if (mode === "auto") delete root.dataset.theme;
+      else root.dataset.theme = mode;
+      const dark = mode === "dark" || (mode === "auto" && osDark.matches);
+      for (const meta of document.querySelectorAll('meta[name="theme-color"]')) {
+        meta.setAttribute("content", dark ? "#161310" : "#f4f1e9");
+      }
+      const next = names[order[(order.indexOf(mode) + 1) % order.length]];
+      btn.setAttribute(
+        "aria-label",
+        `Color theme: ${names[mode]}. Activate for ${next.toLowerCase()}.`
+      );
+    };
+
+    let mode = read();
+    state.textContent = names[mode];
+    apply(mode);
+    btn.hidden = false;
+
+    btn.addEventListener("click", () => {
+      mode = order[(order.indexOf(mode) + 1) % order.length];
+      try {
+        if (mode === "auto") localStorage.removeItem("theme");
+        else localStorage.setItem("theme", mode);
+      } catch {}
+      apply(mode);
+      btn.classList.add("is-swapping");
+      setTimeout(() => {
+        state.textContent = names[mode];
+        btn.classList.remove("is-swapping");
+      }, 150);
+    });
+
+    // in Auto, the browser chrome color must track a live OS change
+    osDark.addEventListener("change", () => {
+      if (mode === "auto") apply("auto");
+    });
+  })();
+</script>

@@ -26,8 +26,27 @@ const jsonLd = JSON.stringify({
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f4f1e9" />
-    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4f1e9" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#161310" />
+    <meta name="color-scheme" content="light dark" />
+    <script is:inline>
+      // Resolve the color theme before first paint: a stored choice is
+      // stamped on <html>; without one, the OS preference governs via CSS.
+      // An explicit choice also pins both theme-color metas so browser
+      // chrome matches the page rather than the OS.
+      (() => {
+        let theme = null;
+        try {
+          theme = localStorage.getItem("theme");
+        } catch {}
+        if (theme !== "light" && theme !== "dark") return;
+        document.documentElement.dataset.theme = theme;
+        const color = theme === "dark" ? "#161310" : "#f4f1e9";
+        for (const meta of document.querySelectorAll('meta[name="theme-color"]')) {
+          meta.setAttribute("content", color);
+        }
+      })();
+    </script>
     <link rel="preload" as="font" type="font/woff2" crossorigin href={newsreaderRoman} />
     <link rel="preload" as="font" type="font/woff2" crossorigin href={newsreaderItalic} />
     <meta property="og:title" content={title} />
