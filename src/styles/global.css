@@ -1683,16 +1683,55 @@ article[id] {
 }
 
 .site-footer .colophon {
+  align-items: center;
   border-top: 1px solid var(--rule-soft);
   color: var(--ink-faint);
   display: flex;
   flex-wrap: wrap;
   font-family: var(--mono);
   font-size: 0.72rem;
-  gap: 10px 26px;
+  gap: 14px 26px;
   justify-content: space-between;
   letter-spacing: 0.05em;
-  padding-block: 22px 34px;
+  padding-block: 24px 36px;
+}
+
+.colophon-provenance {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  margin: 0;
+}
+
+.colophon-mark svg {
+  display: block;
+}
+
+.colophon-nav {
+  align-items: center;
+  display: flex;
+  gap: clamp(14px, 2.4vw, 26px);
+}
+
+.colophon-nav a {
+  color: inherit;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 120ms ease;
+}
+
+.colophon-nav .colophon-github {
+  display: block;
+}
+
+.colophon-nav .colophon-github svg {
+  display: block;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .colophon-nav a:hover {
+    color: var(--seal);
+  }
 }
 
 /* ---- 404 --------------------------------------------------------- */
