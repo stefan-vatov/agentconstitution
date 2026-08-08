@@ -322,14 +322,15 @@ code {
   align-items: center;
   background: var(--seal);
   border-radius: 6px;
-  color: var(--paper-high);
   display: inline-flex;
-  font-size: 1.05rem;
-  font-weight: 500;
   height: 30px;
   justify-content: center;
   transition: transform 160ms var(--ease-out-strong);
   width: 30px;
+}
+
+.brand-mark svg {
+  display: block;
 }
 
 .brand:active .brand-mark {
@@ -1869,7 +1870,7 @@ article[id] {
 }
 
 @media (max-width: 420px) {
-  /* the § mark carries the brand; the wordmark doesn't fit beside the nav */
+  /* the nib mark carries the brand; the wordmark doesn't fit beside the nav */
   .brand-name {
     display: none;
   }

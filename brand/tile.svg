@@ -1,6 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- The app tile: paper nib on the seal, vent and slit overprinted in the tile red.
+       Same artwork as public/favicon.svg. -->
   <rect width="64" height="64" rx="12" fill="#a33021"/>
-  <!-- the nib: crowned base, concave tines; vent + slit overprinted in the tile red -->
   <g transform="translate(10, 5.16) scale(0.44)">
     <path fill="#fbf9f3" d="M 22 21 Q 50 12 78 21 L 78 34 C 78 44 76 50 74 56 C 66 74 55 90 50 110 C 45 90 34 74 26 56 C 24 50 22 44 22 34 Z"/>
     <circle cx="50" cy="50" r="8.4" fill="#a33021"/>

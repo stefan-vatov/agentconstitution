@@ -1,0 +1,103 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+  @font-face {
+    font-family: "Newsreader Variable";
+    font-style: normal;
+    font-weight: 400 700;
+    src: url("../src/assets/fonts/newsreader-latin-opsz-normal-w400-700.woff2") format("woff2-variations");
+  }
+  @font-face {
+    font-family: "Newsreader Variable";
+    font-style: italic;
+    font-weight: 400 700;
+    src: url("../src/assets/fonts/newsreader-latin-opsz-italic-w400-700.woff2") format("woff2-variations");
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    background: #f4f1e9;
+    font-family: "Newsreader Variable", Georgia, serif;
+    font-optical-sizing: auto;
+    color: #211d15;
+    position: relative;
+  }
+  .frame-outer {
+    position: absolute;
+    inset: 14px;
+    border: 1.5px solid rgba(33, 29, 21, 0.4);
+    pointer-events: none;
+  }
+  .frame-inner {
+    position: absolute;
+    inset: 22px;
+    border: 1px solid rgba(33, 29, 21, 0.25);
+    pointer-events: none;
+  }
+  .content { position: absolute; inset: 0; padding: 92px 96px; }
+  .kicker {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: #a33021;
+  }
+  h1 {
+    margin-top: 42px;
+    font-size: 92px;
+    line-height: 1.12;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    max-width: 12ch;
+  }
+  h1 em { font-style: italic; font-weight: 470; color: #a33021; }
+  .url {
+    position: absolute;
+    left: 96px;
+    bottom: 76px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 26px;
+    letter-spacing: 0.06em;
+    color: #6f6753;
+  }
+  .stamp {
+    position: absolute;
+    right: 54px;
+    bottom: 24px;
+    width: 296px;
+    height: 296px;
+    transform: rotate(-9deg);
+  }
+</style></head>
+<body>
+  <div class="frame-outer"></div>
+  <div class="frame-inner"></div>
+  <div class="content">
+    <div class="kicker">Project-level governance for AI coding agents</div>
+    <h1>Write the <em>law</em> your agents build under.</h1>
+    <div class="url">agentconstitution.dev</div>
+  </div>
+  <svg class="stamp" viewBox="0 0 240 240">
+    <defs>
+      <path id="arc-b" d="M 46 120 A 74 74 0 0 0 194 120" />
+      <mask id="nib-cut" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="132">
+        <rect width="100" height="132" fill="white"/>
+        <circle cx="50" cy="50" r="8.4" fill="black"/>
+        <rect x="48.2" y="50" width="3.6" height="68" fill="black"/>
+      </mask>
+    </defs>
+    <g stroke="#a33021" fill="none" opacity="0.92">
+      <circle cx="120" cy="120" r="104" stroke-width="2.5" />
+      <circle cx="120" cy="120" r="97" stroke-width="1" />
+      <circle cx="120" cy="120" r="58" stroke-width="1.4" />
+    </g>
+    <text font-family="ui-monospace, Menlo, monospace" font-size="13.5"
+      fill="#a33021" letter-spacing="7" opacity="0.92">
+      <textPath href="#arc-b" startOffset="50%" text-anchor="middle">RATIFIED</textPath>
+    </text>
+    <g transform="translate(85.5, 77.5) scale(0.69)">
+      <path mask="url(#nib-cut)" fill="#a33021" opacity="0.92"
+        d="M 22 21 Q 50 12 78 21 L 78 34 C 78 44 76 50 74 56 C 66 74 55 90 50 110 C 45 90 34 74 26 56 C 24 50 22 44 22 34 Z"/>
+    </g>
+  </svg>
+</body></html>

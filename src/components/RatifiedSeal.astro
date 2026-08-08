@@ -5,6 +5,7 @@ interface Props {
 
 const { class: className = "seal" } = Astro.props;
 const uid = `seal-ring-${crypto.randomUUID().slice(0, 8)}`;
+const nibUid = `seal-nib-${crypto.randomUUID().slice(0, 8)}`;
 ---
 
 <svg
@@ -31,12 +32,16 @@ const uid = `seal-ring-${crypto.randomUUID().slice(0, 8)}`;
   >
     <textPath href={`#${uid}`}>RATIFIED · 2026-08-05 · BY THE PROJECT AUTHOR ·</textPath>
   </text>
-  <text
-    x="75"
-    y="86"
-    fill="currentColor"
-    font-family="Georgia, serif"
-    font-size="34"
-    text-anchor="middle"
-  >§</text>
+  <g transform="translate(53.75, 48.55) scale(0.425)">
+    <mask id={nibUid} maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="132">
+      <rect width="100" height="132" fill="white"></rect>
+      <circle cx="50" cy="50" r="8.4" fill="black"></circle>
+      <rect x="48.2" y="50" width="3.6" height="68" fill="black"></rect>
+    </mask>
+    <path
+      mask={`url(#${nibUid})`}
+      fill="currentColor"
+      d="M 22 21 Q 50 12 78 21 L 78 34 C 78 44 76 50 74 56 C 66 74 55 90 50 110 C 45 90 34 74 26 56 C 24 50 22 44 22 34 Z"
+    ></path>
+  </g>
 </svg>
