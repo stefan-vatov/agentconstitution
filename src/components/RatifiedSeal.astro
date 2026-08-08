@@ -4,6 +4,7 @@ interface Props {
 }
 
 const { class: className = "seal" } = Astro.props;
+const uid = `seal-ring-${crypto.randomUUID().slice(0, 8)}`;
 ---
 
 <svg
@@ -14,7 +15,7 @@ const { class: className = "seal" } = Astro.props;
 >
   <defs>
     <path
-      id="seal-ring"
+      id={uid}
       d="M75 75 m -53 0 a 53 53 0 1 1 106 0 a 53 53 0 1 1 -106 0"
     ></path>
   </defs>
@@ -28,7 +29,7 @@ const { class: className = "seal" } = Astro.props;
     font-weight="600"
     letter-spacing="2.6"
   >
-    <textPath href="#seal-ring">RATIFIED · 2026-08-05 · BY THE PROJECT AUTHOR ·</textPath>
+    <textPath href={`#${uid}`}>RATIFIED · 2026-08-05 · BY THE PROJECT AUTHOR ·</textPath>
   </text>
   <text
     x="75"

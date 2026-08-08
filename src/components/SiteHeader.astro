@@ -8,6 +8,7 @@ const { root = "" } = Astro.props;
 ---
 
 <header class="site-header" aria-label="Primary">
+  <a class="skip-link" href="#main">Skip to content</a>
   <div class="shell">
     <a class="brand" href="/">
       <span class="brand-mark" aria-hidden="true">§</span>
@@ -19,6 +20,14 @@ const { root = "" } = Astro.props;
       <a href={`${root}#lifecycle`}>Lifecycle</a>
       <a href={`${root}#evidence`}>Evidence</a>
       <a href="/how-it-works">Mechanism</a>
+      <a
+        href="https://github.com/stefan-vatov/agentconstitution"
+        target="_blank"
+        rel="noopener"
+        aria-label="GitHub repository (opens in a new tab)"
+      >
+        GitHub <span aria-hidden="true">↗</span>
+      </a>
       <a class="nav-cta" href={`${root}#adopt`}>Install</a>
     </nav>
   </div>

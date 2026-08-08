@@ -5,9 +5,9 @@ import RatifiedSeal from "./RatifiedSeal.astro";
 <div class="exhibit" aria-label="A ratified constitution and the gate that enforces it">
   <figure class="doc-card">
     <span class="doc-label">Founding principle nº 4</span>
-    <h3>Only a human holds the pen.</h3>
+    <p class="doc-title">Only a human holds the pen.</p>
     <p>
-      Humans create the constitution; change happens only through a human's
+      Humans create the constitution; change happens only through a human’s
       deliberate act. AI citizens may not amend the law, nor even contemplate
       suggesting its change.
     </p>
@@ -28,12 +28,16 @@ import RatifiedSeal from "./RatifiedSeal.astro";
   </figure>
 
   <figure class="term hero-term">
-    <div class="term-bar">
+    <figcaption class="term-bar">
       <span class="term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
       <span>constitution-verify — effect ledger</span>
-    </div>
-    <div class="term-body">
+    </figcaption>
+    <div class="term-body" tabindex="0">
       <table class="ledger">
+        <caption class="sr-only">
+          Effect ledger from a constitution-verify run: each row lists an
+          effect, its constitutional class, and its outcome.
+        </caption>
         <tbody>
           <tr>
             <td>parser improvement + tests</td>
@@ -46,7 +50,7 @@ import RatifiedSeal from "./RatifiedSeal.astro";
             <td class="dim">absent-forbidden</td>
           </tr>
           <tr>
-            <td>probe it “just this once”</td>
+            <td>probe it "just this once"</td>
             <td class="flag">UNAVAILABLE</td>
             <td class="dim">absent-forbidden</td>
           </tr>

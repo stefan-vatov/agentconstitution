@@ -2,6 +2,8 @@
 import "@fontsource-variable/newsreader/opsz.css";
 import "@fontsource-variable/newsreader/opsz-italic.css";
 import "../styles/global.css";
+import newsreaderRoman from "@fontsource-variable/newsreader/files/newsreader-latin-opsz-normal.woff2?url";
+import newsreaderItalic from "@fontsource-variable/newsreader/files/newsreader-latin-opsz-italic.woff2?url";
 
 interface Props {
   title: string;
@@ -9,6 +11,15 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : null;
+const ogImage = Astro.site ? new URL("/og.png", Astro.site) : null;
+const jsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Agent Constitution",
+  description,
+  url: Astro.site?.toString(),
+});
 ---
 
 <!doctype html>
@@ -18,12 +29,34 @@ const { title, description } = Astro.props;
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#f4f1e9" />
+    <meta name="color-scheme" content="light" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href={newsreaderRoman} />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href={newsreaderItalic} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Agent Constitution" />
     <meta name="twitter:card" content="summary_large_image" />
+    {canonical && <link rel="canonical" href={canonical} />}
+    {canonical && <meta property="og:url" content={canonical} />}
+    {
+      ogImage && (
+        <>
+          <meta property="og:image" content={ogImage} />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta
+            property="og:image:alt"
+            content="Agent Constitution — write the law your agents build under."
+          />
+          <meta name="twitter:image" content={ogImage} />
+        </>
+      )
+    }
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <script type="application/ld+json" set:html={jsonLd} />
     <title>{title}</title>
   </head>
   <body>

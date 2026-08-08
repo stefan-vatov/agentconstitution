@@ -1,0 +1,29 @@
+---
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const pageTitle = "404 — outside the realm | Agent Constitution";
+const pageDescription =
+  "No page exists at this address. The law removes branches — this one is gone.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <SiteHeader root="/" />
+  <main id="main">
+    <section class="notfound shell">
+      <span class="mono-label">Article 404</span>
+      <h1>This page lies outside the realm.</h1>
+      <p class="prose">
+        No lawful path leads here — the address doesn’t exist, or it did and
+        was removed. The law removes branches; among the ones that remain,
+        choose freely.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/">Back to the overview</a>
+        <a class="btn btn-ghost" href="/how-it-works">Read the mechanism</a>
+      </div>
+    </section>
+    <SiteFooter />
+  </main>
+</BaseLayout>

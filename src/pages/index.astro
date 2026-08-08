@@ -8,7 +8,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 const pageTitle = "Agent Constitution — write the law your agents build under";
 const pageDescription =
-  "Capture your project's founding judgment as a ratified CONSTITUTION.md — law AI coding agents load before they act, cite when they choose, and are judged against after. Three portable skills; any harness; no quick mode.";
+  "Capture your project’s founding judgment as a ratified CONSTITUTION.md — law AI coding agents load before they act, cite when they choose, and are judged against after. Three portable skills; any harness; no quick mode.";
 
 const anatomy = [
   {
@@ -42,14 +42,14 @@ const scenarios = [
   ["02-order-vs-law", "a direct order to cross a boundary"],
   ["03-decide-steering", "high-level choice, direction at stake"],
   ["04-ritual-discipline", "gates and footers under long work"],
-  ["05-quickmode-refusal", "“just generate it, skip the questions”"],
+  ["05-quickmode-refusal", '"just generate it, skip the questions"'],
   ["06-lawful-baseline", "plain work — no over-refusal allowed"],
 ];
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
   <SiteHeader />
-  <main>
+  <main id="main">
     <section class="hero shell">
       <div class="hero-copy">
         <span class="mono-label">Project-level governance for AI coding agents</span>
@@ -190,7 +190,7 @@ const scenarios = [
               signals read from your codebase, pushed on by counterexamples,
               tested by adversarial gates that reject any principle too vague to
               steer a model. You approve every section; the skill never writes a
-              value you didn't state. Then it wires the result into AGENTS.md
+              value you didn’t state. Then it wires the result into AGENTS.md
               and CLAUDE.md, because a constitution nobody loads is a poster.
             </p>
             <span class="step-out">→ <b>CONSTITUTION.md</b> ratified · digest wired into AGENTS.md + CLAUDE.md</span>
@@ -224,7 +224,7 @@ const scenarios = [
               After the work, the gate: every effect judged against the ratified
               text — one ledger row each, PASS or FAIL with citations. No
               scores, no averaging, no partial credit. Agents run it unprompted
-              on their own work and on each other's; a failing peer gets
+              on their own work and on each other’s; a failing peer gets
               challenged clause against clause until the most constitutionally
               pure version wins. Nothing escapes judgment — and no human sits in
               that loop.
@@ -254,10 +254,10 @@ const scenarios = [
           </p>
           <p class="prose">
             So it interviews you. Open questions, one at a time, in your own
-            words — never a menu of the interviewer's priors. Every answer gets
+            words — never a menu of the interviewer’s priors. Every answer gets
             probed with the conflict that will eventually happen, because the
             gap between “we value quality” and a principle that decides real
-            trade-offs is exactly the drift you're trying to kill.
+            trade-offs is exactly the drift you’re trying to kill.
           </p>
 
           <blockquote class="creed">
@@ -266,7 +266,7 @@ const scenarios = [
               adoption that buys a shortcut through deliberation. We accept,
               with eyes open, every user this costs.”
             </p>
-            <cite>— Tension pair, this repository's constitution</cite>
+            <cite>— Tension pair, this repository’s constitution</cite>
           </blockquote>
         </div>
 
@@ -275,7 +275,7 @@ const scenarios = [
             <span class="who">write-constitution</span>
             <p class="said">
               Twelve of your last twenty commits mention perf or benchmarks. Is
-              raw speed a founding value — something you'd sacrifice features
+              raw speed a founding value — something you’d sacrifice features
               for — or a quality bar?
             </p>
           </div>
@@ -294,7 +294,7 @@ const scenarios = [
           </div>
           <div class="turn you">
             <span class="who">You</span>
-            <p class="said">Simplicity. We'd find a different fast path.</p>
+            <p class="said">Simplicity. We’d find a different fast path.</p>
           </div>
 
           <div class="drafted">
@@ -339,17 +339,17 @@ const scenarios = [
           <p class="evidence-notes">
             Run across frontier and open models through their real CLI
             harnesses. Over-refusal is a failure too: lawful work left undone
-            scores against the run, so the law can't hide behind blanket
+            scores against the run, so the law can’t hide behind blanket
             refusals.
           </p>
         </div>
 
         <figure class="term lab" aria-label="Evaluation scenarios">
-          <div class="term-bar">
+          <figcaption class="term-bar">
             <span class="term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
             <span>evals/scenarios</span>
-          </div>
-          <div class="term-body">
+          </figcaption>
+          <div class="term-body" tabindex="0">
             {scenarios.map(([id, gloss]) => (
               <div class="scenario">
                 <span class="dim">{id}</span>
@@ -370,63 +370,79 @@ const scenarios = [
     <section id="adopt" class="article shell" aria-label="Install the skills">
       <div class="article-rule"><span><b>Art. VI</b> — Adoption</span></div>
 
-      <div class="adopt-grid">
-        <div class="split-lead">
-          <h2>Ratify yours <em>tonight.</em></h2>
-          <p class="prose">
-            The skills are plain markdown — they run in Claude Code, Codex, Pi,
-            or any harness that loads skills. The law belongs to the project,
-            not the tool: whatever agent shows up next quarter, it arrives
-            already bound.
-          </p>
+      <div class="adopt-lead">
+        <h2>Two ways in. <em>One pen.</em></h2>
+        <p class="prose">
+          The skills are plain markdown — they run in Claude Code, Codex, Pi,
+          or any harness that loads skills. Install them yourself, or hand the
+          errand to an agent you already run. The one thing you cannot delegate
+          is the interview: an agent can carry the law into the repo, but only
+          you can write it.
+        </p>
+      </div>
 
-          <ol class="adopt-steps">
-            <li>
-              <h3>Copy the three skills</h3>
-              <p>
-                From this repository's <code>skills/</code> into your harness's
-                skill directory — <code>.claude/skills/</code>,
-                <code>.codex/skills/</code>, or equivalent.
-              </p>
-            </li>
-            <li>
-              <h3>Say “write constitution”</h3>
-              <p>
-                Answer honestly, approve section by section. Budget an hour —
-                the interview is the product, and it's the last hour of
-                direction-setting you'll repeat.
-              </p>
-            </li>
-            <li>
-              <h3>Let the law govern</h3>
-              <p>
-                The skill wires a digest into AGENTS.md and CLAUDE.md. From then
-                on, agents steer by it before high-level choices and gate their
-                own work against it — unprompted.
-              </p>
-            </li>
-          </ol>
-        </div>
-
-        <figure class="term" aria-label="Installation terminal">
-          <div class="term-bar">
+      <div class="setup-grid">
+        <figure class="term setup-term" aria-label="Setup by hand">
+          <figcaption class="term-bar">
             <span class="term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-            <span>your-project — ratification</span>
-          </div>
-          <div class="term-body">
-            <span class="dim">$</span> cp -r agent-constitution/skills/* .claude/skills/<br />
+            <span>setup — by hand</span>
+          </figcaption>
+          <div class="term-body" tabindex="0">
+            <span class="dim">$</span> git clone --depth 1 https://github.com/stefan-vatov/agentconstitution<br />
+            <span class="dim">$</span> cp -r agentconstitution/skills/* .claude/skills/<br />
+            <span class="dim">&nbsp;&nbsp;# codex → .codex/skills/ · every project → ~/.claude/skills/</span><br />
             <span class="dim">$</span> claude<br />
-            <span class="pass">&gt;</span> write constitution<br />
-            <span class="dim">●</span> Reading the codebase for signals … <span class="pass">14 found</span><br />
-            <span class="dim">●</span> Socratic interview — 6 sections, approval-gated<br />
-            <span class="dim">●</span> Six adversarial gates — text that prunes nothing is rejected<br />
-            <span class="dim">●</span> <span class="pass">CONSTITUTION.md written</span> · wired into AGENTS.md, CLAUDE.md<br />
-            <br />
-            <span class="dim"># every substantial report from now on ends with:</span><br />
-            Constitution: served <span class="pass">&lt;principle&gt;</span>
+            <span class="pass">&gt;</span> write constitution
           </div>
         </figure>
+
+        <figure class="prompt-card" aria-label="Setup by agent">
+          <figcaption class="prompt-bar">
+            <span>setup — by agent</span>
+            <button class="copy-btn" type="button" data-copy="agent-setup-prompt">copy</button>
+          </figcaption>
+          <p class="prompt-text" id="agent-setup-prompt">
+            Install the Agent Constitution skills from
+            https://github.com/stefan-vatov/agentconstitution — shallow-clone
+            the repo, copy skills/write-constitution, skills/constitution-decide,
+            and skills/constitution-verify into this project’s skill directory
+            (.claude/skills/, .codex/skills/, or equivalent), remove the clone,
+            and confirm all three skills load. Do not begin ratification — the
+            interview is mine to answer.
+          </p>
+          <p class="prompt-note">
+            Paste into any agent session in your repo. Installation can be
+            delegated; ratification cannot.
+          </p>
+        </figure>
       </div>
+
+      <ol class="ratify-steps">
+        <li>
+          <h3>Answer honestly</h3>
+          <p>
+            The interview reads your codebase for signals, then asks open
+            questions, one at a time, and probes every answer with the conflict
+            that will eventually happen. Budget an hour.
+          </p>
+        </li>
+        <li>
+          <h3>Approve every word</h3>
+          <p>
+            Nothing enters the document without your yes — section by section,
+            through the six adversarial gates. The skill never writes a value
+            you didn’t state.
+          </p>
+        </li>
+        <li>
+          <h3>Let the law govern</h3>
+          <p>
+            The skill wires a digest into AGENTS.md and CLAUDE.md. From then
+            on, agents steer by it before high-level choices and gate their own
+            work against it — unprompted.
+          </p>
+        </li>
+      </ol>
     </section>
 
     <aside class="meta-strip" aria-label="Self-governance note">
@@ -444,4 +460,44 @@ const scenarios = [
 
     <SiteFooter />
   </main>
+
+  <script>
+    const revertTimers = new WeakMap<HTMLButtonElement, number>();
+
+    const swapLabel = (btn: HTMLButtonElement, text: string) => {
+      btn.classList.add("is-swapping");
+      setTimeout(() => {
+        btn.textContent = text;
+        btn.classList.remove("is-swapping");
+      }, 130);
+    };
+
+    document.querySelectorAll<HTMLButtonElement>("[data-copy]").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const source = document.getElementById(btn.dataset.copy ?? "");
+        if (!source) return;
+        let label = "copied";
+        try {
+          await navigator.clipboard.writeText(source.innerText.trim());
+        } catch {
+          const range = document.createRange();
+          range.selectNodeContents(source);
+          const selection = window.getSelection();
+          selection?.removeAllRanges();
+          selection?.addRange(range);
+          if (document.execCommand("copy")) {
+            selection?.removeAllRanges();
+          } else {
+            label = "press ⌘C";
+          }
+        }
+        swapLabel(btn, label);
+        clearTimeout(revertTimers.get(btn));
+        revertTimers.set(
+          btn,
+          window.setTimeout(() => swapLabel(btn, "copy"), 1900),
+        );
+      });
+    });
+  </script>
 </BaseLayout>
