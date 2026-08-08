@@ -1,0 +1,41 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = "seal" } = Astro.props;
+---
+
+<svg
+  class={className}
+  viewBox="0 0 150 150"
+  role="img"
+  aria-label="Ratified 2026-08-05 by the project author"
+>
+  <defs>
+    <path
+      id="seal-ring"
+      d="M75 75 m -53 0 a 53 53 0 1 1 106 0 a 53 53 0 1 1 -106 0"
+    ></path>
+  </defs>
+  <circle cx="75" cy="75" r="71" fill="none" stroke="currentColor" stroke-width="2.5"></circle>
+  <circle cx="75" cy="75" r="64.5" fill="none" stroke="currentColor" stroke-width="1"></circle>
+  <circle cx="75" cy="75" r="41" fill="none" stroke="currentColor" stroke-width="1"></circle>
+  <text
+    fill="currentColor"
+    font-family="ui-monospace, 'SF Mono', Menlo, monospace"
+    font-size="10.2"
+    font-weight="600"
+    letter-spacing="2.6"
+  >
+    <textPath href="#seal-ring">RATIFIED · 2026-08-05 · BY THE PROJECT AUTHOR ·</textPath>
+  </text>
+  <text
+    x="75"
+    y="86"
+    fill="currentColor"
+    font-family="Georgia, serif"
+    font-size="34"
+    text-anchor="middle"
+  >§</text>
+</svg>

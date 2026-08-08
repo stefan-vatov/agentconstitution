@@ -1,36 +1,32 @@
 ---
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const pageTitle = "How it works | Agent Constitution";
+const pageTitle = "The mechanism | Agent Constitution";
 const pageDescription =
-  "The mechanistic argument: why a constitution reshapes the distribution of choices an autonomous agent makes, and how it exerts force in three layers.";
+  "Why a constitution reshapes the distribution of choices an autonomous agent makes: agents are samplers, high-level decisions are wide distributions, and a constitution is a prior over futures.";
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
+  <SiteHeader root="/" />
   <main>
-    <header class="site-header" aria-label="Primary navigation">
-      <a class="brand" href="/">
-        <span class="brand-mark" aria-hidden="true">AC</span>
-        <span>Agent Constitution</span>
-      </a>
-      <nav>
-        <a href="/#problem">Problem</a>
-        <a href="/#force">Force</a>
-        <a href="/#ratify">Ratify</a>
-      </nav>
-    </header>
-
     <article class="essay">
-      <p class="eyebrow">The argument</p>
+      <span class="mono-label">The mechanism</span>
       <h1>A constitution is a prior over futures.</h1>
+      <p class="essay-sub">
+        The mechanistic argument: why one document above the rules files
+        changes what autonomous agents build.
+      </p>
 
       <h2>Agents are samplers</h2>
-      <p>
+      <p class="opener">
         A language model does not retrieve the next move — it samples it. At
         every decision point, the model weighs a distribution of plausible
         continuations, shaped by everything in its context. Most of the time
         that distribution is narrow: the type system, the failing test, or the
-        existing pattern leaves one obvious continuation, and the agent takes it.
+        existing pattern leaves one obvious continuation, and the agent takes
+        it.
       </p>
       <p>
         But the decisions that determine what a project becomes are not like
@@ -73,12 +69,12 @@ const pageDescription =
         project actually wants.
       </p>
       <p>
-        This is also why vague principles fail. "We value quality" is a uniform
-        prior — it rejects nothing, moves no probability, prunes no branch.
-        That is the real content of the Motherhood Test: a principle nobody
-        could disagree with is a principle that cannot steer a model. The
-        adversarial gates in ratification exist to guarantee that every
-        sentence in the constitution does distribution work.
+        This is also why vague principles fail. “We value quality” is a uniform
+        prior — it rejects nothing, moves no probability, prunes no branch. A
+        principle nobody could disagree with is a principle that cannot steer a
+        model. The adversarial gates in ratification exist to throw such
+        sentences out — to guarantee that every line in the constitution does
+        distribution work.
       </p>
 
       <h2>Force requires presence</h2>
@@ -107,12 +103,9 @@ const pageDescription =
         can do — it concentrates probability on futures worth building.
       </p>
 
-      <a class="secondary-action essay-back" href="/">Back to the overview</a>
+      <a class="btn btn-ghost essay-back" href="/">Back to the overview</a>
     </article>
 
-    <footer>
-      <span>Agent Constitution</span>
-      <span>The constitution is the artifact. Ratification is the product.</span>
-    </footer>
+    <SiteFooter />
   </main>
 </BaseLayout>

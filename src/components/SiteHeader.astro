@@ -1,0 +1,25 @@
+---
+interface Props {
+  /** Prefix for section anchors — "" on the index page, "/" elsewhere. */
+  root?: string;
+}
+
+const { root = "" } = Astro.props;
+---
+
+<header class="site-header" aria-label="Primary">
+  <div class="shell">
+    <a class="brand" href="/">
+      <span class="brand-mark" aria-hidden="true">§</span>
+      <span class="brand-name">Agent Constitution</span>
+    </a>
+    <nav class="site-nav" aria-label="Site">
+      <a href={`${root}#drift`}>The drift</a>
+      <a href={`${root}#document`}>The document</a>
+      <a href={`${root}#lifecycle`}>Lifecycle</a>
+      <a href={`${root}#evidence`}>Evidence</a>
+      <a href="/how-it-works">Mechanism</a>
+      <a class="nav-cta" href={`${root}#adopt`}>Install</a>
+    </nav>
+  </div>
+</header>

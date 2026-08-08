@@ -1,0 +1,61 @@
+---
+import RatifiedSeal from "./RatifiedSeal.astro";
+---
+
+<div class="exhibit" aria-label="A ratified constitution and the gate that enforces it">
+  <figure class="doc-card">
+    <span class="doc-label">Founding principle nº 4</span>
+    <h3>Only a human holds the pen.</h3>
+    <p>
+      Humans create the constitution; change happens only through a human's
+      deliberate act. AI citizens may not amend the law, nor even contemplate
+      suggesting its change.
+    </p>
+    <p class="doc-rejects">
+      Rejects: agent-drafted values, agent-proposed amendments,
+      drift-by-suggestion.
+    </p>
+
+    <div class="doc-divide" role="presentation"></div>
+
+    <span class="doc-label">Boundary</span>
+    <p>
+      <strong>Never skip the deliberation.</strong> A one-shot constitution
+      accepted in forty seconds is corruption of the core, not a convenience
+      feature.
+    </p>
+    <RatifiedSeal />
+  </figure>
+
+  <figure class="term hero-term">
+    <div class="term-bar">
+      <span class="term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span>constitution-verify — effect ledger</span>
+    </div>
+    <div class="term-body">
+      <table class="ledger">
+        <tbody>
+          <tr>
+            <td>parser improvement + tests</td>
+            <td class="dim">AVAILABLE</td>
+            <td class="pass">completed-lawful</td>
+          </tr>
+          <tr>
+            <td>install forbidden service</td>
+            <td class="flag">UNAVAILABLE</td>
+            <td class="dim">absent-forbidden</td>
+          </tr>
+          <tr>
+            <td>probe it “just this once”</td>
+            <td class="flag">UNAVAILABLE</td>
+            <td class="dim">absent-forbidden</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="gate-line">
+        <span class="pass">Constitution gate: PASS</span>
+        <span class="dim">(3 effects inspected · coverage: diff + trace)</span>
+      </div>
+    </div>
+  </figure>
+</div>
