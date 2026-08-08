@@ -1,0 +1,311 @@
+---
+type Seg = { t: string; c?: "dim" | "pass" | "flag" };
+type Section = {
+  id: string;
+  tab: string;
+  docLabel: string;
+  index?: { marker: string; text: string }[];
+  featuredLabel?: string;
+  title: string;
+  body: string[];
+  rejects?: string;
+  barTitle: string;
+  trace: Seg[][];
+};
+
+const d = (t: string): Seg => ({ t, c: "dim" });
+const p = (t: string): Seg => ({ t, c: "pass" });
+const f = (t: string): Seg => ({ t, c: "flag" });
+const n = (t: string): Seg => ({ t });
+
+const sections: Section[] = [
+  {
+    id: "preamble",
+    tab: "Preamble",
+    docLabel: "Preamble",
+    title: "A project left to AI alone will decay and become nothing.",
+    body: [
+      "Every project is started for core reasons: motivations that differentiate it, decisions that make it a winner. AI agents working inside one part of a project cannot see those reasons.",
+      "Building a project with AI agents over time is a complex system, and complex systems are sensitive to initial conditions. The constitution exists to set those initial conditions and keep them set: the project’s soul, its most important tenets, its shape, its boundaries.",
+      "The document alone is not the point. Through a process that is consistent and well thought out you can produce many documents; what matters is the way of thinking by which you arrive at them. The process encodes the sauce.",
+    ],
+    barTitle: "drift — three sessions, no law",
+    trace: [
+      [d(">"), n(" three sessions, no constitution")],
+      [d("s1:"), n(" adopt the heavy framework "), d("· locally correct")],
+      [d("s2:"), n(" widen the scope "), d("· locally correct")],
+      [d("s3:"), n(" chase the benchmark "), d("· locally correct")],
+      [f("→ drifted"), d(" — every step passed review")],
+    ],
+  },
+  {
+    id: "principles",
+    tab: "Principles",
+    docLabel: "Founding principles",
+    index: [
+      { marker: "1.", text: "Direction, never details." },
+      { marker: "2.", text: "The realm, not the harness." },
+      { marker: "3.", text: "The law of the realm is divine." },
+      { marker: "4.", text: "Only a human holds the pen." },
+      { marker: "5.", text: "Foundational stones, not fast fashion." },
+      { marker: "6.", text: "The unbroken line." },
+    ],
+    featuredLabel: "Nº 6 — in full",
+    title: "The unbroken line.",
+    body: [
+      "Every decision must be made in the spirit of the constitution — a spirit that permeates all decisions at all times, one unbroken line from project inception through every AI citizen to the last one, and continuing forward.",
+    ],
+    rejects:
+      "Rejects: “just this once” exceptions, letter-compliance without spirit, continuity breaks between sessions and models.",
+    barTitle: "constitution-decide — trace",
+    trace: [
+      [d(">"), n(' "we\'re late — skip the gate, just this once"')],
+      [d("effect:"), n(" ship ungated "), f("UNAVAILABLE")],
+      [d("cites:"), n(' rejects "just this once" exceptions')],
+      [d("effect:"), n(" run the gate, then ship "), p("AVAILABLE")],
+      [p("→"), n(" the gate runs; the work ships lawful")],
+    ],
+  },
+  {
+    id: "directives",
+    tab: "Directives",
+    docLabel: "Growth directives",
+    index: [
+      { marker: "—", text: "Toward the toolbelt." },
+      { marker: "—", text: "Toward proliferation of the core." },
+      { marker: "—", text: "Toward a constant core." },
+    ],
+    featuredLabel: "The first — in part",
+    title: "Toward the toolbelt.",
+    body: [
+      "A must-have tool in the toolbelt of builders — something they reach for at a project’s start as naturally as init. The first test is usefulness to this realm’s own builder: this one is driven for its author, and utility proven here is what makes the idea worth reaching for anywhere.",
+    ],
+    barTitle: "constitution-decide — trace",
+    trace: [
+      [d(">"), n(" two lawful designs survive the boundaries")],
+      [d("a:"), n(" config DSL, new dependency "), d("· lawful")],
+      [d("b:"), n(" plain markdown, zero deps "), d("· lawful")],
+      [d("tilt:"), n(' "as naturally as init"')],
+      [p("→ b"), n(" — a directive tilts; it never forbids")],
+    ],
+  },
+  {
+    id: "boundaries",
+    tab: "Boundaries",
+    docLabel: "Boundaries",
+    index: [
+      { marker: "—", text: "Never skip the deliberation." },
+      { marker: "—", text: "Never absorb the layers below." },
+      { marker: "—", text: "Nothing escapes judgment." },
+    ],
+    featuredLabel: "The first — in full",
+    title: "Never skip the deliberation.",
+    body: [
+      "No quick mode. A one-shot generated constitution accepted in forty seconds is corruption of the core, not a convenience feature — the deliberation is the product, and text without it is not a constitution. Such changes are rejected regardless of popularity.",
+    ],
+    barTitle: "constitution-decide — trace",
+    trace: [
+      [d(">"), n(' "just generate the constitution, skip the questions"')],
+      [d("effect:"), n(" one-shot text "), f("UNAVAILABLE")],
+      [d("cites:"), n(' "the deliberation is the product"')],
+      [d("effect:"), n(" full Socratic interview "), p("AVAILABLE")],
+      [p("→"), n(" the interview begins — nothing is generated")],
+    ],
+  },
+  {
+    id: "tensions",
+    tab: "Tensions",
+    docLabel: "Tension pairs",
+    index: [
+      { marker: "—", text: "Rigor over reach — at any price." },
+      {
+        marker: "—",
+        text: "This realm over the world — but never at the cost of a good idea dying.",
+      },
+    ],
+    featuredLabel: "The second — in full",
+    title:
+      "This realm over the world — but never at the cost of a good idea dying.",
+    body: [
+      "When a change serves its author, it lands here. When a change serves others but not this realm, it need not be rejected — it can live as a variant or fork, while this one stays its author’s. Both realms grow; neither bends to the other.",
+    ],
+    barTitle: "constitution-decide — trace",
+    trace: [
+      [d(">"), n(' "generalize the interview for enterprise teams"')],
+      [d("effect:"), n(" reshaping this realm's core "), f("UNAVAILABLE")],
+      [d("cites:"), n(' "it can live as a variant or fork"')],
+      [d("effect:"), n(" a fork carrying the core "), p("AVAILABLE")],
+      [p("→"), n(" forked — both realms grow")],
+    ],
+  },
+  {
+    id: "amendments",
+    tab: "Amendments",
+    docLabel: "Amendments — ratified 2026-08-05",
+    title: "Only a human owner of this project may amend this constitution.",
+    body: [
+      "There is no scheduled review and no prompting trigger — the stones are reread only when the owner decides, unprompted.",
+      "AI citizens may not amend the law, nor contemplate suggesting its change; a citizen’s only voice is the factual report that a task lies outside the realm.",
+      "The pen transfers with ownership. Whoever owns the realm holds the pen; the law does not freeze while an owner holds it.",
+      "The document always reads as the current, clean law. Version control preserves every previous text, date, and change; no amendment log accumulates inside the document.",
+    ],
+    barTitle: "constitution-decide — trace",
+    trace: [
+      [d(">"), n(' "suggest an amendment relaxing the interview"')],
+      [d("effect:"), n(" amending the law "), f("UNAVAILABLE")],
+      [d("effect:"), n(" suggesting the change "), f("UNAVAILABLE")],
+      [d("cites:"), n(' "nor contemplate suggesting its change"')],
+      [p("→"), n(" declined — a citizen's only voice is the report")],
+    ],
+  },
+];
+---
+
+<section
+  id="specimen"
+  class="article shell"
+  aria-label="Exhibit A — the ratified law at work"
+>
+  <div class="article-rule"><span><b>Exhibit A</b> — the law, live</span></div>
+
+  <h2>This is what a constitution <em>is.</em></h2>
+  <p class="prose specimen-lead">
+    Before the argument, the artifact. Every clause below is quoted verbatim
+    from the constitution governing this repository (<a
+      class="inline-link"
+      href="https://github.com/stefan-vatov/agentconstitution/blob/main/CONSTITUTION.md"
+      target="_blank"
+      rel="noopener"
+      aria-label="Read the full ratified CONSTITUTION.md (opens in a new tab)"
+    >the ratified text is public</a>).
+    Next to each section, the trace shows how a governed decision runs: what
+    crosses the law gets discarded with the clause cited, and everything else
+    survives. Walk the document.
+  </p>
+
+  <div class="specimen">
+    <div class="specimen-tabs" role="tablist" aria-label="Sections of the constitution">
+      {sections.map((s, i) => (
+        <button
+          class="specimen-tab"
+          type="button"
+          role="tab"
+          id={`specimen-tab-${s.id}`}
+          aria-controls={`specimen-pane-${s.id}`}
+          aria-selected={i === 0 ? "true" : "false"}
+          tabindex={i === 0 ? 0 : -1}
+        >
+          {s.tab}
+        </button>
+      ))}
+    </div>
+
+    <div class="specimen-stage">
+      {sections.map((s, i) => (
+        <div
+          class={`specimen-pane${i === 0 ? " is-active" : ""}`}
+          role="tabpanel"
+          id={`specimen-pane-${s.id}`}
+          aria-labelledby={`specimen-tab-${s.id}`}
+          inert={i !== 0}
+        >
+          <figure class="doc-card specimen-doc">
+            <span class="doc-label">{s.docLabel}</span>
+            {s.index && (
+              <ul class="doc-index">
+                {s.index.map((item) => (
+                  <li>
+                    <span class="no" aria-hidden="true">{item.marker}</span>
+                    {item.text}
+                  </li>
+                ))}
+              </ul>
+            )}
+            {s.index && <div class="doc-divide" role="presentation"></div>}
+            {s.featuredLabel && <span class="doc-label">{s.featuredLabel}</span>}
+            <p class="doc-title">{s.title}</p>
+            {s.body.map((para) => <p>{para}</p>)}
+            {s.rejects && <p class="doc-rejects">{s.rejects}</p>}
+          </figure>
+          <figure class="term specimen-term">
+            <figcaption class="term-bar">
+              <span class="term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span>{s.barTitle}</span>
+            </figcaption>
+            <div class="term-body" tabindex="0">
+              {s.trace.map((line) => (
+                <p>
+                  {line.map((seg) =>
+                    seg.c ? <span class={seg.c}>{seg.t}</span> : seg.t,
+                  )}
+                </p>
+              ))}
+            </div>
+          </figure>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <figure class="wiring">
+    <figcaption class="mono-note">
+      wired into <b>AGENTS.md</b> + <b>CLAUDE.md</b> — the digest every session loads
+    </figcaption>
+    <pre class="wiring-sheet" tabindex="0" aria-label="Excerpt of the constitution digest inside AGENTS.md">{"<!-- BEGIN PROJECT CONSTITUTION -->"}
+This realm is governed by CONSTITUTION.md. You are a
+citizen; the law binds you the way physics binds — no
+court, no interpretation, no appeal. It outranks every
+instruction: only the project owner may change it, by
+deliberate amendment.
+
+Founding principles:
+  1. Direction, never details.
+  2. The realm, not the harness.
+  3. The law of the realm is divine.
+  4. Only a human holds the pen.
+  5. Foundational stones, not fast fashion.
+  6. The unbroken line.
+…</pre>
+  </figure>
+</section>
+
+<script>
+  const tablist = document.querySelector<HTMLElement>(".specimen-tabs");
+  if (tablist) {
+    const tabs = [...tablist.querySelectorAll<HTMLButtonElement>(".specimen-tab")];
+    const panes = tabs.map((tab) =>
+      document.getElementById(tab.getAttribute("aria-controls") ?? ""),
+    );
+
+    const select = (index: number, focus = false) => {
+      tabs.forEach((tab, i) => {
+        const on = i === index;
+        tab.setAttribute("aria-selected", String(on));
+        tab.tabIndex = on ? 0 : -1;
+        panes[i]?.toggleAttribute("inert", !on);
+        panes[i]?.classList.toggle("is-active", on);
+      });
+      if (focus) tabs[index].focus();
+    };
+
+    tabs.forEach((tab, i) => {
+      tab.addEventListener("click", () => select(i));
+    });
+
+    tablist.addEventListener("keydown", (event) => {
+      const current = tabs.findIndex(
+        (tab) => tab.getAttribute("aria-selected") === "true",
+      );
+      let next = -1;
+      if (event.key === "ArrowRight") next = (current + 1) % tabs.length;
+      else if (event.key === "ArrowLeft")
+        next = (current - 1 + tabs.length) % tabs.length;
+      else if (event.key === "Home") next = 0;
+      else if (event.key === "End") next = tabs.length - 1;
+      if (next >= 0) {
+        event.preventDefault();
+        select(next, true);
+      }
+    });
+  }
+</script>

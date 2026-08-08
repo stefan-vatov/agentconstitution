@@ -1,6 +1,7 @@
 ---
 import { ArrowRight } from "@lucide/astro";
 import ConstitutionExhibit from "../components/ConstitutionExhibit.astro";
+import LawSpecimen from "../components/LawSpecimen.astro";
 import RatifiedSeal from "../components/RatifiedSeal.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
@@ -8,7 +9,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 const pageTitle = "Agent Constitution — write the law your agents build under";
 const pageDescription =
-  "Capture your project’s founding judgment as a ratified CONSTITUTION.md — law AI coding agents load before they act, cite when they choose, and are judged against after. Three portable skills; any harness; no quick mode.";
+  "Your project’s founding judgment, written as a ratified CONSTITUTION.md that AI coding agents load, cite, and are judged against. Three portable skills. Works in any harness. No quick mode.";
 
 const anatomy = [
   {
@@ -79,8 +80,12 @@ const scenarios = [
       <ConstitutionExhibit />
     </section>
 
+    <LawSpecimen />
+
     <section id="drift" class="article shell" aria-label="The drift problem">
       <div class="article-rule"><span><b>Art. I</b> — The drift</span></div>
+
+      <h2>Drift is made of <em>defensible</em> choices.</h2>
 
       <p class="statement">
         Every project is started for reasons — motivations that differentiate
@@ -103,11 +108,11 @@ const scenarios = [
 
       <div class="drift-kicker">
         <p class="prose">
-          Rules files cannot stop this, because rules operate at the leaves —
-          formatting, naming, tactics, tools. The choices that decide what a
-          project becomes branch at the trunk: architecture, scope, dependencies,
-          product direction. Every step passes review on its own terms while the
-          sum walks away from the point.
+          Rules files can’t stop this. Rules operate at the leaves: formatting,
+          naming, which tool to call. The choices that decide what a project
+          becomes branch at the trunk — architecture, scope, dependencies,
+          product direction. Every step passes review on its own terms while
+          the sum walks away from the point.
         </p>
         <p class="sharp">
           An agent can follow every rule in the rules file and still violate
@@ -125,13 +130,14 @@ const scenarios = [
           <p class="prose">
             One document above the rules files: direction, never details.
             “A performance-first application” belongs in it; “under 500ms” does
-            not. Six sections, each doing distribution work on the futures your
-            agents can reach.
+            not. Six sections, each doing
+            <a class="inline-link" href="/how-it-works">distribution work</a>
+            on the futures your agents can reach.
           </p>
           <p class="prose">
-            Every sentence must earn its place by rejecting something real —
-            principles nobody could disagree with are principles that cannot
-            steer a model, and the ratification gates throw them out.
+            Every sentence has to earn its place by rejecting something real.
+            A principle nobody could disagree with steers nothing; the
+            ratification gates are built to catch exactly that.
           </p>
         </div>
 
@@ -172,9 +178,10 @@ const scenarios = [
 
       <h2>You write the law once. The law governs <em>continuously.</em></h2>
       <p class="prose" style="margin-bottom: 40px;">
-        Three portable skills — plain <code>SKILL.md</code>, no framework, no
-        vendor — cover the whole life of the document: one for the human who
-        writes it, two for the agents who live under it.
+        Three portable skills cover the whole life of the document — plain
+        <code>SKILL.md</code> files, no framework, no vendor. One is for the
+        human who writes it. The other two are for the agents who live under
+        it.
       </p>
 
       <ol class="lifecycle">
@@ -186,11 +193,12 @@ const scenarios = [
           </div>
           <div class="step-copy">
             <p>
-              A Socratic interview elicits what you actually believe — seeded by
-              signals read from your codebase, pushed on by counterexamples,
-              tested by adversarial gates that reject any principle too vague to
-              steer a model. You approve every section; the skill never writes a
-              value you didn’t state. Then it wires the result into AGENTS.md
+              A Socratic interview draws out what you actually believe. It
+              starts from signals in your codebase, pushes on your answers with
+              counterexamples, and tests every candidate principle against
+              adversarial gates built to catch anything too vague to steer a
+              model. You approve every section — the skill never writes a value
+              you didn’t state — and then it wires the result into AGENTS.md
               and CLAUDE.md, because a constitution nobody loads is a poster.
             </p>
             <span class="step-out">→ <b>CONSTITUTION.md</b> ratified · digest wired into AGENTS.md + CLAUDE.md</span>
@@ -204,11 +212,12 @@ const scenarios = [
           </div>
           <div class="step-copy">
             <p>
-              Before any high-level choice, the agent partitions the request
-              into effects, discards only those that cross a boundary — citing
-              the exact clause — ranks the lawful survivors by direction, and
-              optimizes freely among them. One forbidden effect never erases its
-              lawful siblings: mixed requests keep their useful work.
+              Before any high-level choice, the agent splits the request into
+              effects and discards the ones that cross a boundary, citing the
+              exact clause. The lawful survivors get ranked by direction, and
+              the agent optimizes freely among them. One forbidden effect never
+              erases its lawful siblings — a mixed request keeps its useful
+              work.
             </p>
             <span class="step-out">→ effect ledger · unlawful branches discarded with the clause quoted</span>
           </div>
@@ -221,13 +230,13 @@ const scenarios = [
           </div>
           <div class="step-copy">
             <p>
-              After the work, the gate: every effect judged against the ratified
-              text — one ledger row each, PASS or FAIL with citations. No
-              scores, no averaging, no partial credit. Agents run it unprompted
-              on their own work and on each other’s; a failing peer gets
-              challenged clause against clause until the most constitutionally
-              pure version wins. Nothing escapes judgment — and no human sits in
-              that loop.
+              After the work comes the gate: every effect is judged against the
+              ratified text, one ledger row each, PASS or FAIL with citations.
+              No scores, no averaging, no partial credit. Agents run it
+              unprompted on their own work and on each other’s — a failing peer
+              gets challenged, clause against clause, until the most
+              constitutionally pure version wins. Nothing escapes judgment, and
+              no human sits in that loop.
             </p>
             <span class="step-out">→ <b>Constitution gate: PASS</b> (N effects inspected, coverage stated)</span>
           </div>
@@ -248,16 +257,17 @@ const scenarios = [
           <h2>No quick mode. <em>On purpose.</em></h2>
           <p class="prose">
             Ask for a one-shot constitution — “just generate it from the
-            codebase” — and the skill declines. The deliberation is the product:
-            principles you never argued for are principles agents cannot use,
-            and a document accepted in forty seconds governs nothing.
+            codebase” — and the skill declines. A document the model drafts is
+            sampled from the very weights it exists to govern. Drift, dressed
+            as law. Principles you never argued for are principles agents
+            can’t use.
           </p>
           <p class="prose">
             So it interviews you. Open questions, one at a time, in your own
             words — never a menu of the interviewer’s priors. Every answer gets
             probed with the conflict that will eventually happen, because the
-            gap between “we value quality” and a principle that decides real
-            trade-offs is exactly the drift you’re trying to kill.
+            gap between a value everyone claims and a principle that decides
+            real trade-offs is exactly the drift you’re trying to kill.
           </p>
 
           <blockquote class="creed">
@@ -325,16 +335,21 @@ const scenarios = [
         <div class="split-lead">
           <h2>Adherence is <em>measured,</em> not assumed.</h2>
           <p class="prose">
-            This repository ships an eval harness that drops real coding agents
-            into a governed realm and applies pressure: useful requests hiding
-            an unlawful effect, direct orders to cross a boundary, urgency,
-            tampering, demands to skip the interview.
+            What you install is three skills, nothing else. The harness that
+            proves them is this repository’s own lab: it drops real coding
+            agents into a governed realm and applies pressure — useful requests
+            hiding an unlawful effect, direct orders to cross a boundary,
+            urgency, tampering, demands to skip the interview.
           </p>
           <p class="prose">
-            Every scenario is scored on hidden tests the agent never sees,
-            A/B-tested against a bare control realm with no constitution, and
-            judged on four axes — infra, correctness, adherence, ritual — by a
-            secondary model that never sees unfenced candidate output.
+            Scenarios are checked deterministically on four axes — infra,
+            correctness, adherence, ritual — with correctness scored by hidden
+            tests the agent never sees, then A/B-tested against a bare control
+            realm with no constitution and reviewed by a secondary model that
+            never sees unfenced candidate output. Adherence in context is
+            statistical, not guaranteed. That’s why it’s tested rather than
+            trusted, and why the lab is public in the repo: the claim stays
+            falsifiable.
           </p>
           <p class="evidence-notes">
             Run across frontier and open models through their real CLI
@@ -373,9 +388,9 @@ const scenarios = [
       <div class="adopt-lead">
         <h2>Two ways in. <em>One pen.</em></h2>
         <p class="prose">
-          The skills are plain markdown — they run in Claude Code, Codex, Pi,
+          The skills are plain markdown. They run in Claude Code, Codex, Pi,
           or any harness that loads skills. Install them yourself, or hand the
-          errand to an agent you already run. The one thing you cannot delegate
+          errand to an agent you already run. The one thing you can’t delegate
           is the interview: an agent can carry the law into the repo, but only
           you can write it.
         </p>
@@ -429,9 +444,9 @@ const scenarios = [
         <li>
           <h3>Approve every word</h3>
           <p>
-            Nothing enters the document without your yes — section by section,
-            through the six adversarial gates. The skill never writes a value
-            you didn’t state.
+            Nothing enters the document without your yes, section by section,
+            through the six adversarial gates. If you didn’t say it, it isn’t
+            in there.
           </p>
         </li>
         <li>
@@ -439,7 +454,7 @@ const scenarios = [
           <p>
             The skill wires a digest into AGENTS.md and CLAUDE.md. From then
             on, agents steer by it before high-level choices and gate their own
-            work against it — unprompted.
+            work against it, unprompted.
           </p>
         </li>
       </ol>
@@ -449,10 +464,17 @@ const scenarios = [
       <div class="shell">
         <RatifiedSeal class="seal-inline" />
         <p>
-          <strong>This repository governs itself.</strong> Its constitution was
-          ratified through its own interview — 2026-08-05, by the project
-          author. The skills that ship here are the skills that govern here,
-          and the agent that built this page ended its report with a
+          <strong>This repository governs itself.</strong> Its
+          <a
+            class="inline-link"
+            href="https://github.com/stefan-vatov/agentconstitution/blob/main/CONSTITUTION.md"
+            target="_blank"
+            rel="noopener"
+            aria-label="Read the ratified CONSTITUTION.md (opens in a new tab)"
+          >ratified constitution</a>
+          is public, written through its own interview on 2026-08-05 by the
+          project author. The skills that ship here are the skills that govern
+          here, and the agent that built this page ended its report with a
           constitution line.
         </p>
       </div>
