@@ -22,6 +22,11 @@
   --seal: #a33021;
   --seal-deep: #7e2114;
   --seal-wash: rgba(163, 48, 33, 0.08);
+  --seal-glow: #cf5a41; /* the wax, bright enough to read on the dark plate */
+
+  /* starlight — the astral plate's celestial layer */
+  --astral: #c3d9e4;
+  --astral-bright: #ecf5fb;
 
   /* machine register */
   --term-bg: #1b1813;
@@ -850,6 +855,95 @@ article[id] {
 
 .anatomy p em {
   color: var(--ink-faint);
+}
+
+/* the tree of possibilities — astral chart plate (Art. II) */
+
+.tree-exhibit {
+  margin-top: clamp(36px, 5vh, 56px);
+}
+
+/* a plate from a star atlas, mounted on the page — document chrome,
+   not an app window */
+.plate {
+  background: var(--term-bg);
+  border: 1px solid var(--term-edge);
+  border-radius: 4px;
+  box-shadow: 0 22px 60px rgba(33, 29, 21, 0.3);
+  overflow: hidden;
+}
+
+.plate-bar {
+  align-items: center;
+  border-bottom: 1px solid var(--term-edge-soft);
+  color: var(--term-dim);
+  display: flex;
+  flex-wrap: wrap;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  gap: 8px 14px;
+  justify-content: space-between;
+  letter-spacing: 0.08em;
+  padding: 11px 15px;
+}
+
+.plate-label {
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.plate-caption {
+  color: var(--ink-faint);
+  font-size: 0.98rem;
+  font-style: italic;
+  line-height: 1.5;
+  margin-top: 14px;
+  max-width: 62ch;
+}
+
+.term-ab {
+  align-items: center;
+  display: inline-flex;
+  gap: 7px;
+  margin-left: auto;
+}
+
+.term-ab-btn {
+  background: none;
+  border: 1px solid var(--term-edge);
+  border-radius: 4px;
+  color: var(--term-dim);
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  padding: 3px 10px;
+  transition: color 120ms ease, border-color 120ms ease,
+    transform 160ms var(--ease-out-strong);
+}
+
+.term-ab-btn:active {
+  transform: scale(0.96);
+}
+
+.term-ab-btn[aria-pressed="true"] {
+  border-color: var(--astral);
+  color: var(--astral-bright);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .term-ab-btn:not([aria-pressed="true"]):hover {
+    color: var(--term-text);
+  }
+}
+
+.tree-body {
+  position: relative;
+}
+
+.tree-canvas {
+  display: block;
+  width: 100%;
 }
 
 .binds {
