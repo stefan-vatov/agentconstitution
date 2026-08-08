@@ -300,6 +300,10 @@ code {
   transition: color 120ms ease;
 }
 
+.site-nav a[aria-current="page"] {
+  color: var(--seal);
+}
+
 .site-nav .nav-cta {
   border: 1px solid var(--ink);
   border-radius: 5px;
@@ -731,6 +735,10 @@ article[id] {
   font-style: italic;
 }
 
+.article-lede {
+  margin-bottom: clamp(28px, 4vh, 40px);
+}
+
 /* statement paragraphs (Art. I) */
 
 .statement {
@@ -752,6 +760,96 @@ article[id] {
 .statement.quiet,
 .statement .quiet {
   color: var(--ink-faint);
+}
+
+/* Fig. I — the drift, printed on the paper beside the statements */
+
+.drift-grid {
+  align-items: center;
+  display: grid;
+  gap: clamp(36px, 5vw, 84px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+}
+
+.drift-fig svg {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.fig-walk {
+  fill: none;
+  opacity: 0.6;
+  stroke: var(--ink-soft);
+  stroke-width: 1.3;
+}
+
+.fig-step {
+  fill: var(--ink-faint);
+  opacity: 0.5;
+}
+
+.fig-end {
+  fill: var(--ink-soft);
+}
+
+.fig-bearing {
+  stroke: var(--ink-faint);
+  stroke-dasharray: 3 6;
+  stroke-width: 1.2;
+}
+
+.fig-point {
+  fill: none;
+  stroke: var(--ink-soft);
+  stroke-width: 1.4;
+}
+
+.fig-origin {
+  fill: var(--ink);
+}
+
+.fig-label {
+  fill: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* draw-on when the figure enters view; without JS it is simply printed */
+.drift-fig.will-draw .fig-walk {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.drift-fig.will-draw .fig-mid,
+.drift-fig.will-draw .fig-late {
+  opacity: 0;
+}
+
+.drift-fig.will-draw.is-drawn .fig-mid {
+  opacity: 1;
+  transition: opacity 500ms ease 200ms;
+}
+
+.drift-fig.will-draw.is-drawn .fig-point {
+  opacity: 1;
+}
+
+.drift-fig.will-draw.is-drawn .fig-walk {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1500ms var(--ease-out-strong);
+  transition-delay: calc(var(--i) * 180ms);
+}
+
+.drift-fig.will-draw.is-drawn .fig-late {
+  opacity: 1;
+  transition: opacity 600ms ease 1500ms;
+}
+
+.drift-fig.will-draw.is-drawn .fig-step {
+  opacity: 0.5;
 }
 
 .pull-quote {
@@ -892,7 +990,8 @@ article[id] {
   text-transform: uppercase;
 }
 
-.plate-caption {
+.plate-caption,
+.fig-caption {
   color: var(--ink-faint);
   font-size: 0.98rem;
   font-style: italic;
@@ -1669,6 +1768,7 @@ article[id] {
   .interview-grid,
   .evidence-grid,
   .drift-kicker,
+  .drift-grid,
   .binds,
   .specimen-pane {
     grid-template-columns: minmax(0, 1fr);

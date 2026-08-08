@@ -5,6 +5,7 @@ interface Props {
 }
 
 const { root = "" } = Astro.props;
+const onMechanism = Astro.url.pathname.replace(/\/$/, "") === "/how-it-works";
 ---
 
 <header class="site-header" aria-label="Primary">
@@ -19,7 +20,9 @@ const { root = "" } = Astro.props;
       <a href={`${root}#document`}>The document</a>
       <a href={`${root}#lifecycle`}>Lifecycle</a>
       <a href={`${root}#evidence`}>Evidence</a>
-      <a href="/how-it-works">Mechanism</a>
+      <a href="/how-it-works" aria-current={onMechanism ? "page" : undefined}>
+        Mechanism
+      </a>
       <a
         href="https://github.com/stefan-vatov/agentconstitution"
         target="_blank"

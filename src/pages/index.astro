@@ -1,6 +1,6 @@
 ---
-import { ArrowRight } from "@lucide/astro";
 import ConstitutionExhibit from "../components/ConstitutionExhibit.astro";
+import DriftFigure from "../components/DriftFigure.astro";
 import LawSpecimen from "../components/LawSpecimen.astro";
 import PossibilityTree from "../components/PossibilityTree.astro";
 import RatifiedSeal from "../components/RatifiedSeal.astro";
@@ -67,7 +67,7 @@ const scenarios = [
         <div class="hero-actions">
           <a class="btn btn-primary" href="#adopt">
             Install the skills
-            <ArrowRight size={15} />
+            <span aria-hidden="true">→</span>
           </a>
           <a class="btn btn-ghost" href="/how-it-works">Read the mechanism</a>
         </div>
@@ -86,26 +86,32 @@ const scenarios = [
     <section id="drift" class="article shell" aria-label="The drift problem">
       <div class="article-rule"><span><b>Art. I</b> — The drift</span></div>
 
-      <h2>Drift is made of <em>defensible</em> choices.</h2>
+      <div class="drift-grid">
+        <div>
+          <h2>Drift is made of <em>defensible</em> choices.</h2>
 
-      <p class="statement">
-        Every project is started for reasons — motivations that differentiate
-        it, decisions meant to make it win.
-      </p>
-      <p class="statement quiet">
-        An agent working inside one corner of the codebase cannot see those
-        reasons. It makes the locally optimal choice. Each model drifts the
-        project in its own direction, because the pull comes from training and
-        weights, not from the work.
-      </p>
+          <p class="statement">
+            Every project is started for reasons — motivations that
+            differentiate it, decisions meant to make it win.
+          </p>
+          <p class="statement quiet">
+            An agent working inside one corner of the codebase cannot see
+            those reasons. It makes the locally optimal choice. Each model
+            drifts the project in its own direction, because the pull comes
+            from training and weights, not from the work.
+          </p>
 
-      <blockquote class="pull-quote">
-        <p>
-          The end state is always the same. Functional mediocrity: the average
-          of all the weights.
-        </p>
-        <cite>— Constitution of this repository, preamble</cite>
-      </blockquote>
+          <blockquote class="pull-quote">
+            <p>
+              The end state is always the same. Functional mediocrity: the
+              average of all the weights.
+            </p>
+            <cite>— Constitution of this repository, preamble</cite>
+          </blockquote>
+        </div>
+
+        <DriftFigure />
+      </div>
 
       <div class="drift-kicker">
         <p class="prose">
@@ -180,7 +186,7 @@ const scenarios = [
       <div class="article-rule"><span><b>Art. III</b> — The lifecycle</span></div>
 
       <h2>You write the law once. The law governs <em>continuously.</em></h2>
-      <p class="prose" style="margin-bottom: 40px;">
+      <p class="prose article-lede">
         Three portable skills cover the whole life of the document — plain
         <code>SKILL.md</code> files, no framework, no vendor. One is for the
         human who writes it. The other two are for the agents who live under
